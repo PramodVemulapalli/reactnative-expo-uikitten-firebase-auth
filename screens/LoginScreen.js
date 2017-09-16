@@ -41,24 +41,6 @@ class LoginScreen extends Component {
 
   render() {
 
-    /* Header Code
-    <View style={styles.headerView}>
-        <Icon
-          type="material"
-          color="#00aced"
-          name="home"
-          size={28}
-        />
-        <Icon
-          type="font-awesome"
-          color="#00aced"
-          name="cutlery"
-          size={20}
-        />
-        <Text style={styles.headerText}> HomeFood </Text>
-    </View>
-    */
-
     return (
       <View>
         <Divider style={{ backgroundColor: 'gray' }} />
@@ -134,27 +116,12 @@ const styles = {
   viewContainer: {
     margin: 10
   },
-  headerView: {
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   orView: {
     margin: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  headerText: {
-    color: '#00aced',
-    fontSize: 30,
-    fontWeight: 'bold',
-    alignSelf: 'center'
-  },
+  }
 }
 
 

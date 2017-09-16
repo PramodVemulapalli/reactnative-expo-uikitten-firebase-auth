@@ -12,7 +12,7 @@ class SettingsScreen extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.overviewContainer}>
         <View>
           <Text> Settings Screen </Text>
           <Text> Settings Screen </Text>
@@ -21,12 +21,12 @@ class SettingsScreen extends Component {
           <Text> Settings Screen </Text>
           <Text> Settings Screen </Text>
         </View>
-        <View style={styles.buttonContainer}>
+        <View>
           <Button
             large
             title="Log out"
             backgroundColor="#00aced"
-            icon={{ name: 'search' }}
+            icon={{ type: 'font-awesome', color: "#ffffff", name: 'sign-out' }}
             onPress={ () => this.props.logoutUser()  }
           />
         </View>
@@ -36,8 +36,10 @@ class SettingsScreen extends Component {
 }
 
 const styles = {
-  buttonContainer: {
-    position: 'relative'
+  overviewContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 }
 
