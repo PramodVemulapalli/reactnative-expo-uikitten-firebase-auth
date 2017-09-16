@@ -127,7 +127,6 @@ const styles = {
 
 const mapStateToProps = ({ auth }) => {
   const { email, password, error, user } = auth;
-
   return { email, password, error, user };
 };
 
