@@ -1,7 +1,7 @@
 // import { AsyncStorage } from 'react-native';
 import { Facebook } from 'expo';
 import firebase from 'firebase';
-import fbappid from './../consts';
+import { fbappid } from './../consts';
 // import { emailChanged, passwordChanged, signupUser } from '../actions';
 
 import {
@@ -28,7 +28,7 @@ export const facebookLogin = () => async dispatch => {
 
 
 const doFacebookLogin = async dispatch => {
-
+  console.log(fbappid);
   let { type, token } = await Facebook.logInWithReadPermissionsAsync(fbappid, {
     permissions: ['public_profile', 'email']
   });
