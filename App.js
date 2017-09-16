@@ -9,6 +9,7 @@ import reducers from './reducers';
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { LOGIN_STATUS_CHANGED } from './actions/types';
+import { config } from './consts';
 
 import WelcomeScreen from './screens/WelcomeScreen';
 import RegisterScreen from './screens/RegisterScreen';
@@ -30,14 +31,7 @@ export default class App extends React.Component {
 
   componentWillMount() {
 
-    const config = {
-      apiKey: "AIzaSyAOU9XJOb9lwbl3nTY-Y5F7EzIcpDGyu0A",
-      authDomain: "homefood-d7c6d.firebaseapp.com",
-      databaseURL: "https://homefood-d7c6d.firebaseio.com",
-      projectId: "homefood-d7c6d",
-      storageBucket: "",
-      messagingSenderId: "512397701929"
-    };
+    console.log(config);
     firebase.initializeApp(config);
 
   }
