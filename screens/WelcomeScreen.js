@@ -34,19 +34,19 @@ class WelcomeScreen extends Component {
             paginationStyle={{ bottom: 70 }}
           >
             <View style={styles.slide1}>
-              <Text style={styles.headertext}> Daisy's App </Text>
+              <Text style={styles.headertext}> Daisy's Poems App </Text>
               <Text style={styles.text}>But I promised I would do it,</Text>
             </View>
             <View style={styles.slide2}>
-              <Text style={styles.headertext}> Daisy's App </Text>
+              <Text style={styles.headertext}> Daisy's Poems App </Text>
               <Text style={styles.text}>and he thought it might be so</Text>
             </View>
             <View style={styles.slide3}>
-              <Text style={styles.headertext}> Daisy's App </Text>
+              <Text style={styles.headertext}> Daisy's Poems App </Text>
               <Text style={styles.text}>If it came from one that loved him,</Text>
             </View>
             <View style={styles.slide4}>
-              <Text style={styles.headertext}> Daisy's App </Text>
+              <Text style={styles.headertext}> Daisy's Poems App </Text>
               <Text style={styles.text}>perhaps it would ease the blow.</Text>
             </View>
           </Swiper>

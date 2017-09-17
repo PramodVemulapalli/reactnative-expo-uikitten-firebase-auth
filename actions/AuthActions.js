@@ -2,6 +2,9 @@ import firebase from 'firebase';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
+  PHONE_CHANGED,
+  FIRSTNAME_CHANGED,
+  LASTNAME_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
@@ -10,6 +13,7 @@ import {
   LOAD_WELCOME_CHANGED,
   SIGNUP_USER
 } from './types';
+
 
 export const emailChanged = (text) => {
   return {
@@ -21,6 +25,27 @@ export const emailChanged = (text) => {
 export const passwordChanged = (text) => {
   return {
     type: PASSWORD_CHANGED,
+    payload: text
+  };
+};
+
+export const phoneChanged = (text) => {
+  return {
+    type: PHONE_CHANGED,
+    payload: text
+  };
+};
+
+export const firstnameChanged = (text) => {
+  return {
+    type: FIRSTNAME_CHANGED,
+    payload: text
+  };
+};
+
+export const lastnameChanged = (text) => {
+  return {
+    type: LASTNAME_CHANGED,
     payload: text
   };
 };

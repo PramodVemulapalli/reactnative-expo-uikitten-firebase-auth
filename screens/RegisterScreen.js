@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, signupUser, facebookLogin } from '../actions';
+import { emailChanged, passwordChanged, phoneChanged, firstnameChanged, lastnameChanged, signupUser, facebookLogin } from '../actions';
 
 import { FormLabel, FormInput, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
 
@@ -19,6 +19,18 @@ class RegisterScreen extends Component {
 
   onPasswordChange(text) {
     this.props.passwordChanged(text);
+  }
+
+  onPhoneChange(text) {
+    this.props.phoneChanged(text);
+  }
+
+  onFirstnameChange(text) {
+    this.props.firstnameChanged(text);
+  }
+
+  onLastnameChange(text) {
+    this.props.lastnameChanged(text);
   }
 
   onButtonPress() {
@@ -42,23 +54,6 @@ class RegisterScreen extends Component {
 
   render() {
     return (
-      /*
-      <View style={styles.headerView}>
-          <Icon
-            type="material"
-            color="#00aced"
-            name="home"
-            size={28}
-          />
-          <Icon
-            type="font-awesome"
-            color="#00aced"
-            name="cutlery"
-            size={20}
-          />
-          <Text style={styles.headerText}> HomeFood </Text>
-      </View>
-      */
 
       <View>
         <Divider style={{ backgroundColor: 'gray' }} />
@@ -76,26 +71,46 @@ class RegisterScreen extends Component {
           </View>
           <View>
                 <View style={{ marginBottom: 10 }}>
+                  <FormLabel>Enter Phone Number</FormLabel>
+                  <FormInput
+                    value={this.props.phone}
+                    onChangeText={phone => this.onPhoneChange(phone)}
+                  />
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around'}} >
+                  <View style={{flex:1}} >
+                    <FormLabel>Enter First Name</FormLabel>
+                    <FormInput
+                      value={this.props.firstname}
+                      onChangeText={firstname => this.onFirstnameChange(firstname)}
+                    />
+                  </View>
+                  <View style={{flex:1}} >
+                    <FormLabel>Enter Last Name</FormLabel>
+                    <FormInput
+                      value={this.props.lastname}
+                      onChangeText={lastname => this.onLastnameChange(lastname)}
+                    />
+                  </View>
+                </View>
+                <View style={{ marginBottom: 10 }}>
                   <FormLabel>Enter Email</FormLabel>
                   <FormInput
                     value={this.props.email}
                     onChangeText={email => this.onEmailChange(email)}
                   />
                 </View>
-
                 <View style={{ marginBottom: 10 }}>
-                  <FormLabel>Enter Paasword</FormLabel>
+                  <FormLabel>Enter Password</FormLabel>
                   <FormInput
                     value={this.props.password}
                     onChangeText={password => this.onPasswordChange(password)}
                     secureTextEntry={true}
                   />
                 </View>
-
                 <Text style={styles.errorTextStyle}>
                   {this.props.error}
                 </Text>
-
                 <View style={styles.viewContainer}>
                   {this.renderButton()}
                 </View>
@@ -143,10 +158,10 @@ const styles = {
 }
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error } = auth;
-  return { email, password, error };
+  const { email, password, phone, firstname, lastname, error } = auth;
+  return { email, password, error, phone, firstname, lastname };
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, signupUser, facebookLogin
+  emailChanged, passwordChanged, phoneChanged, firstnameChanged, lastnameChanged, signupUser, facebookLogin
 })(RegisterScreen);
