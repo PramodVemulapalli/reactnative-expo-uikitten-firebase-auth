@@ -5,6 +5,7 @@ import { Button } from 'react-native-elements';
 
 class OrdersScreen extends Component {
 
+  // Donot show header 
   static navigationOptions = {
     header: null
   };
