@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import validator from 'validator';
 import { emailChanged, passwordChanged, phoneChanged, firstnameChanged, lastnameChanged, signupUser, facebookLogin } from '../actions';
@@ -172,7 +173,7 @@ class RegisterScreen extends Component {
   render() {
     return (
 
-      <View>
+      <KeyboardAwareScrollView enableOnAndroid={true}>
         <Divider style={{ backgroundColor: 'gray' }} />
           <View style={styles.buttonContainer}>
             <SocialIcon
@@ -268,7 +269,7 @@ class RegisterScreen extends Component {
                 </View>
 
           </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
