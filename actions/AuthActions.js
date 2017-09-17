@@ -78,8 +78,8 @@ export const loginUser = ({ email, password }) => {
     dispatch({ type: LOGIN_USER });
     try {
       let user = await firebase.auth().signInWithEmailAndPassword(email, password);
-      loginUserSuccess(dispatch, user);
       console.log('user logged successfully');
+
     }
     catch (error) {
       console.log(error);
@@ -117,7 +117,7 @@ export const logoutUser = () => {
 
 };
 
-export const signupUser = ({ email, password }) => {
+export const signupUser = ({ email, password, phone, firstname, lastname  }) => {
   return async (dispatch) => {
 
     dispatch({
@@ -125,11 +125,17 @@ export const signupUser = ({ email, password }) => {
       payload: 'checking'
     });
     dispatch({ type: SIGNUP_USER });
+    var displayName = firstname + ' ' + lastname;
+    var phoneNumber = '+1'+ phone;
     console.log(email);
     console.log(password);
+    console.log(displayName);
+    console.log(phoneNumber);
 
     try {
       let user = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      user.updateProfile({ displayName, phoneNumber });
+      console.log(user);
       loginUserSuccess(dispatch, user);
     }
     catch (error) {
