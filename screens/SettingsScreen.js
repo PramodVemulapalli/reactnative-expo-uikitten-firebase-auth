@@ -6,6 +6,8 @@ import { logoutUser } from '../actions';
 
 
 class SettingsScreen extends Component {
+
+  // Donot show header 
   static navigationOptions = {
     header: null
   };
