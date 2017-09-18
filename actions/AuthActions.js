@@ -134,7 +134,15 @@ export const signupUser = ({ email, password, phone, firstname, lastname  }) => 
 
     try {
       let user = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      user.updateProfile({ displayName, phoneNumber });
+      user.updateProfile({ displayName });
+      // write user properties to firebase
+      firebase.database().ref(`/users/${user.uid}/userDetails`).set({
+        email,
+        phone,
+        firstname,
+        lastname,
+        displayName
+      });
       console.log(user);
       loginUserSuccess(dispatch, user);
     }

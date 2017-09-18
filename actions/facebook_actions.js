@@ -51,7 +51,16 @@ const doFacebookLogin = async dispatch => {
   console.log(token);
 
   try {
-    await firebase.auth().signInWithCredential(credential);
+    let user = await firebase.auth().signInWithCredential(credential);
+    console.log(user);
+    console.log(user.email);
+    // write user properties to firebase
+    firebase.database().ref(`/users/${user.uid}/userDetails`).set({
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL
+    });
+
   } catch (error) {
     console.log(error);
     dispatch({
