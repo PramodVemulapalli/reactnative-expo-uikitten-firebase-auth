@@ -146,26 +146,6 @@ class RegisterScreen extends Component {
     return;
   }
 
-  // render the signup button if there are no form validation errors
-  renderButton() {
-    if (this.state.emailFlag && this.state.phoneFlag && this.state.firstnameFlag && this.state.lastnameFlag && this.state.passwordFlag) {
-      return (
-        <Button
-          onPress={this.onButtonPress.bind(this)}
-          title="Sign Up !"
-           />
-      );
-    } else {
-      return (
-        <Button
-          onPress={this.onButtonPress.bind(this)}
-          title="Sign Up !"
-          disabled={true}
-           />
-      );
-    }
-  }
-
   onNavPress = (screenname) => {
     this.props.navigation.navigate(screenname);
   }
@@ -265,7 +245,11 @@ class RegisterScreen extends Component {
                   {this.props.error}
                 </Text>
                 <View style={styles.viewContainer}>
-                  {this.renderButton()}
+                  <Button
+                    onPress={this.onButtonPress.bind(this)}
+                    title="Submit"
+                    disabled={!(this.state.emailFlag && this.state.phoneFlag && this.state.firstnameFlag && this.state.lastnameFlag && this.state.passwordFlag)}
+                     />
                 </View>
 
           </View>

@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
+import validator from 'validator';
 import { emailChanged, passwordChanged, loginUser, facebookLogin } from '../actions';
-import { FormLabel, FormInput, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
+import { FormLabel, FormInput, FormValidationMessage, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
 
 
 class LoginScreen extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      emailError: '',
+      passwordError: '',
+      emailFlag: 0,
+      passwordFlag: 0
+    }
+  }
 
   static navigationOptions = {
      title: 'Login',
@@ -19,6 +32,7 @@ class LoginScreen extends Component {
 
   onPasswordChange(text) {
     this.props.passwordChanged(text);
+    this.validateInput('password',text);
   }
 
   onButtonPress() {
@@ -26,13 +40,44 @@ class LoginScreen extends Component {
     this.props.loginUser({ email, password });
   }
 
-  renderButton() {
+  // Validate the form inputs
+  validateInput(inputName, inputVal) {
 
-    return (
-      <Button
-        onPress={this.onButtonPress.bind(this)} title="Submit" />
-    );
+    if (inputName == 'email') {
+      if (validator.isEmail(inputVal)){
+        this.setState({ emailError: '' });
+        this.setState({ emailFlag: 1 });
+      } else {
+        this.setState({ emailError: 'Please enter a valid email address'});
+        this.setState({ emailFlag: 0 });
+      }
+    }
 
+    if (inputName == 'password') {
+      if (validator.isAscii(inputVal)){
+        this.setState({ passwordError: '' });
+        this.setState({ passwordFlag: 1 });
+      } else {
+        this.setState({ passwordError: 'Please enter a valid password'});
+        this.setState({ passwordFlag: 0 });
+      }
+    }
+  }
+
+  // Display form validation errors if needed
+
+  renderFormError(inputName) {
+    if (inputName == 'email') {
+      if (this.state.emailError !='') {
+        return (<FormValidationMessage>{this.state.emailError}</FormValidationMessage>);
+      }
+    }
+    if (inputName == 'password') {
+      if (this.state.passwordError !='') {
+        return (<FormValidationMessage>{this.state.passwordError}</FormValidationMessage>);
+      }
+    }
+    return;
   }
 
   onNavPress = (screenname) => {
@@ -42,7 +87,7 @@ class LoginScreen extends Component {
   render() {
 
     return (
-      <View>
+      <KeyboardAwareScrollView>
         <Divider style={{ backgroundColor: 'gray' }} />
         <View style={styles.buttonContainer}>
           <SocialIcon
@@ -62,7 +107,13 @@ class LoginScreen extends Component {
                 <FormInput
                   value={this.props.email}
                   onChangeText={email => this.onEmailChange(email)}
+                  onBlur={() => {
+                    this.validateInput('email', this.props.email);
+                  }}
                 />
+                <View>
+                  { this.renderFormError('email') }
+                </View>
               </View>
 
               <View style={{ marginBottom: 10 }}>
@@ -71,7 +122,13 @@ class LoginScreen extends Component {
                   value={this.props.password}
                   onChangeText={password => this.onPasswordChange(password)}
                   secureTextEntry={true}
+                  onBlur={() => {
+                    this.validateInput('password', this.props.password);
+                  }}
                 />
+                <View>
+                  { this.renderFormError('password') }
+                </View>
               </View>
 
               <Text style={styles.errorTextStyle}>
@@ -79,7 +136,11 @@ class LoginScreen extends Component {
               </Text>
 
               <View style={styles.viewContainer}>
-                {this.renderButton()}
+                <Button
+                  onPress={this.onButtonPress.bind(this)}
+                  title="Submit"
+                  disabled={!(this.state.emailFlag && this.state.passwordFlag)}
+                   />
               </View>
 
         </View>
@@ -98,7 +159,7 @@ class LoginScreen extends Component {
             </View>
         </View>
 
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
