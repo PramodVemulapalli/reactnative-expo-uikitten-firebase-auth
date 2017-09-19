@@ -79,7 +79,7 @@ export const loginUser = ({ email, password }) => {
     try {
       let user = await firebase.auth().signInWithEmailAndPassword(email, password);
       console.log('user logged successfully');
-
+      loginUserSuccess(dispatch, user);
     }
     catch (error) {
       console.log(error);
@@ -113,6 +113,10 @@ export const logoutUser = () => {
           payload: 'loggedin'
         });
       }
+      dispatch({
+        type: LOGOUT_USER,
+        payload: 'loggedout'
+      });
   };
 
 };
