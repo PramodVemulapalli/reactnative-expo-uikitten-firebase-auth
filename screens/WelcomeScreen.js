@@ -14,7 +14,7 @@ class WelcomeScreen extends Component {
   };
 
 
-  onButtonPress = (screenname) => {
+  onNavPress = (screenname) => {
     this.props.navigation.navigate(screenname);
   };
 
@@ -54,7 +54,7 @@ class WelcomeScreen extends Component {
         <View style={styles.buttongroup}>
           <View style={styles.buttonStyle1}>
             <Button
-              onPress={() => this.onButtonPress('login_scr')}
+              onPress={() => this.onNavPress('login_scr')}
               backgroundColor="#003399"
               title="Login"
               color="#ffffff"
@@ -62,7 +62,7 @@ class WelcomeScreen extends Component {
           </View>
           <View style={styles.buttonStyle2}>
             <Button
-              onPress={() => this.onButtonPress('register_scr')}
+              onPress={() => this.onNavPress('profile_scr')}
               backgroundColor="#f50"
               title="Register"
               color="#ffffff"

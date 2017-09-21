@@ -14,7 +14,7 @@ import {
 // AsyncStorage.setItem('fb_token', token);
 // AsyncStorage.getItem('fb_token');
 
-export const facebookLogin = () => async dispatch => {
+// export const facebookLogin = ({email, phone, firstname, lastname }) => async dispatch => {
   // let token = await AsyncStorage.getItem('fb_token');
 
   // if (token) {
@@ -22,52 +22,110 @@ export const facebookLogin = () => async dispatch => {
     // dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
   // } else {
     // Start up FB Login process
-    doFacebookLogin(dispatch);
+    // doFacebookLogin(dispatch, email, phone, firstname, lastname);
   // }
+// };
+
+export const facebookSignin = () => {
+
+    return async (dispatch) => {
+      console.log(fbappid);
+      let { type, token } = await Facebook.logInWithReadPermissionsAsync(fbappid, {
+        permissions: ['public_profile', 'email']
+      });
+
+      dispatch({
+        type: LOGIN_STATUS_CHANGED,
+        payload: 'checking'
+      });
+
+      console.log(credential);
+      if (type === 'cancel') {
+        dispatch({
+          type: LOGIN_STATUS_CHANGED,
+          payload: 'loginfailed'
+        });
+        return (dispatch({ type: FACEBOOK_LOGIN_FAIL }));
+      }
+
+      var credential = firebase.auth.FacebookAuthProvider.credential(token);
+      console.log(token);
+
+      try {
+        let user = await firebase.auth().signInWithCredential(credential);
+        // write user properties to firebase
+        firebase.database().ref(`/users/${user.uid}/userDetails`).update({
+          fbEmail: user.email,
+          fbDisplayName: user.displayName,
+          fbPhotoURL: user.photoURL
+        });
+
+      } catch (error) {
+        console.log(error);
+        dispatch({
+          type: LOGIN_STATUS_CHANGED,
+          payload: 'notloggedin'
+        });
+      }
+      // await AsyncStorage.setItem('fb_token', token);
+      dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+  };
+
 };
 
+export const facebookSignup = ({ email, phone, firstname, lastname  }) => {
 
-const doFacebookLogin = async dispatch => {
-  console.log(fbappid);
-  let { type, token } = await Facebook.logInWithReadPermissionsAsync(fbappid, {
-    permissions: ['public_profile', 'email']
-  });
+    return async (dispatch) => {
+      console.log(fbappid);
+      let { type, token } = await Facebook.logInWithReadPermissionsAsync(fbappid, {
+        permissions: ['public_profile', 'email']
+      });
 
-  dispatch({
-    type: LOGIN_STATUS_CHANGED,
-    payload: 'checking'
-  });
+      dispatch({
+        type: LOGIN_STATUS_CHANGED,
+        payload: 'checking'
+      });
 
-  console.log(credential);
-  if (type === 'cancel') {
-    dispatch({
-      type: LOGIN_STATUS_CHANGED,
-      payload: 'loginfailed'
-    });
-    return (dispatch({ type: FACEBOOK_LOGIN_FAIL }));
-  }
+      console.log(credential);
+      if (type === 'cancel') {
+        dispatch({
+          type: LOGIN_STATUS_CHANGED,
+          payload: 'loginfailed'
+        });
+        return (dispatch({ type: FACEBOOK_LOGIN_FAIL }));
+      }
 
-  var credential = firebase.auth.FacebookAuthProvider.credential(token);
-  console.log(token);
+      var credential = firebase.auth.FacebookAuthProvider.credential(token);
+      console.log(token);
 
-  try {
-    let user = await firebase.auth().signInWithCredential(credential);
-    console.log(user);
-    console.log(user.email);
-    // write user properties to firebase
-    firebase.database().ref(`/users/${user.uid}/userDetails`).set({
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
-    });
+      try {
+        let user = await firebase.auth().signInWithCredential(credential);
+        console.log(user);
+        console.log(user.email);
+        var displayName = firstname + ' ' + lastname;
+        console.log(email);
+        console.log(displayName);
+        // write user properties to firebase
+        firebase.database().ref(`/users/${user.uid}/userDetails`).set({
+          email: email,
+          phone: phone,
+          firstname: firstname,
+          lastname: lastname,
+          displayName: displayName,
+          fbEmail: user.email,
+          fbDisplayName: user.displayName,
+          fbPhotoURL: user.photoURL
+        });
 
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: LOGIN_STATUS_CHANGED,
-      payload: 'notloggedin'
-    });
-  }
-  // await AsyncStorage.setItem('fb_token', token);
-  dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+      } catch (error) {
+        console.log(error);
+        dispatch({
+          type: LOGIN_STATUS_CHANGED,
+          payload: 'notloggedin'
+        });
+      }
+      // await AsyncStorage.setItem('fb_token', token);
+      dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+  };
+
 };

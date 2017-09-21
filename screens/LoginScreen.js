@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import validator from 'validator';
-import { emailChanged, passwordChanged, loginUser, facebookLogin } from '../actions';
+import { emailChanged, passwordChanged, loginUser, facebookSignin } from '../actions';
 import { FormLabel, FormInput, FormValidationMessage, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
 
 
@@ -95,7 +95,7 @@ class LoginScreen extends Component {
               button
               fontWeight="400"
               type="facebook"
-              onPress={ () => this.props.facebookLogin() }
+              onPress={ () => this.props.facebookSignin() }
             />
         </View>
         <View style={styles.orView}>
@@ -192,5 +192,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser, facebookLogin
+  emailChanged, passwordChanged, loginUser, facebookSignin
 })(LoginScreen);

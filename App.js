@@ -17,6 +17,7 @@ import LoginScreen from './screens/LoginScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import MenuScreen from './screens/MenuScreen';
 import OrdersScreen from './screens/OrdersScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import SettingsScreen from './screens/SettingsScreen';
 
 
@@ -41,6 +42,7 @@ export default class App extends React.Component {
       loading_scr: { screen: LoadingScreen },
       welcome_scr: { screen: WelcomeScreen },
       register_scr: { screen: RegisterScreen },
+      profile_scr: { screen: ProfileScreen },
       login_scr: { screen: LoginScreen },
       main_scr: {
           screen: TabNavigator({

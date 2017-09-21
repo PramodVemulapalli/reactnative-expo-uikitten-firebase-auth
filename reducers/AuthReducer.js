@@ -41,7 +41,12 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, error: '' };
     case LOGIN_STATUS_CHANGED:
       console.log('AuthReducer: LOGIN_STATUS_CHANGED');
-      return { ...state, loginStatus: action.payload};
+      if (action.payload == 'notloggedin') {
+        return { ...state, loginStatus: action.payload, email: '', password: '', phone:'', firstname: '', lastname: '', error:'', user: null };
+      } else {
+        return { ...state, loginStatus: action.payload};
+      }
+
     case LOAD_WELCOME_CHANGED:
       return { ...state, loadWelcome: action.payload };
     case LOGIN_USER_SUCCESS:

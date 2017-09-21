@@ -86,14 +86,7 @@ export const loginUser = ({ email, password }) => {
       loginUserFail(dispatch);
     }
 
-    /*
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => loginUserSuccess(dispatch, user))
-      .catch((error) => {
-        console.log(error);
-        loginUserFail(dispatch);
-      });
-    */
+
   };
 };
 
@@ -113,10 +106,6 @@ export const logoutUser = () => {
           payload: 'loggedin'
         });
       }
-      dispatch({
-        type: LOGOUT_USER,
-        payload: 'loggedout'
-      });
   };
 
 };
@@ -177,23 +166,7 @@ export const authStateChanged = () => {
 
 }
 
-/*
-export const signupUser = ({ email, password }) => {
-  return (dispatch) => {
-    dispatch({ type: SIGNUP_USER });
-    console.log(email);
-    console.log(password);
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => loginUserSuccess(dispatch, user))
-      .catch((error) => {
-        console.log(error);
-        loginUserFail(dispatch);
-      });
 
-  };
-};
-
-*/
 
 const loginUserFail = (dispatch) => {
   dispatch({ type: LOGIN_USER_FAIL });
