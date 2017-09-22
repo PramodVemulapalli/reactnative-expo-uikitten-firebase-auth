@@ -143,7 +143,7 @@ class RegisterScreen extends Component {
                 <View style={styles.viewContainer}>
                   <Button
                     onPress={this.onButtonPress.bind(this)}
-                    title="Submit"
+                    title="Register!"
                     disabled={!(this.state.emailFlag && this.state.passwordFlag)}
                      />
                 </View>

@@ -154,7 +154,7 @@ class LoginScreen extends Component {
                 backgroundColor="#f50"
                 fontSize={20}
                 icon={{ type: 'font-awesome', color: "#ffffff", name: 'grav' }}
-                onPress={ () => this.onNavPress('register_scr') }
+                onPress={ () => this.onNavPress('profile_scr') }
               />
             </View>
         </View>
