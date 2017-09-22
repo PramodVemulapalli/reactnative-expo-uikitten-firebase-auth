@@ -13,6 +13,7 @@
     "react-native-elements": "^0.16.0",
     "react-native-keyboard-aware-scroll-view": "^0.3.0",
     "react-native-loading-spinner-overlay": "^0.5.2",
+    "react-native-modal": "^4.0.0",
     "react-native-swiper": "^1.5.10",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.6",

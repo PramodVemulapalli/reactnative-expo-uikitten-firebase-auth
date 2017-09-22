@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import firebase from 'firebase';
 import { Button } from 'react-native-elements';
+import Modal from 'react-native-modal';
+import { errorClear } from '../actions';
 import { AppLoading } from 'expo';
 
 
@@ -17,6 +19,22 @@ class WelcomeScreen extends Component {
   onNavPress = (screenname) => {
     this.props.navigation.navigate(screenname);
   };
+
+
+  renderModalContent = () => (
+    <View style={styles.modalContent}>
+      <Text>{this.props.error}</Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Close"
+          backgroundColor="#f50"
+          fontSize={20}
+          icon={{ type: 'font-awesome', color: "#ffffff", name: 'grav' }}
+          onPress={ () => this.props.errorClear('') }
+        />
+      </View>
+    </View>
+  );
 
 
 
@@ -69,6 +87,9 @@ class WelcomeScreen extends Component {
             />
           </View>
         </View>
+        <Modal isVisible={this.props.error != ''} style={styles.bottomModal}>
+          {this.renderModalContent()}
+        </Modal>
       </View>
 
     );
@@ -150,4 +171,11 @@ const styles = {
   }
 }
 
-export default WelcomeScreen;
+const mapStateToProps = ({ auth }) => {
+  const { error } = auth;
+  return { error };
+};
+
+export default connect(mapStateToProps, {
+  errorClear
+})(WelcomeScreen);

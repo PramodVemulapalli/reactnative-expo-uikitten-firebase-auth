@@ -7,28 +7,15 @@ import { fbappid } from './../consts';
 import {
   FACEBOOK_LOGIN_SUCCESS,
   FACEBOOK_LOGIN_FAIL,
-  LOGIN_STATUS_CHANGED
+  LOGIN_STATUS_CHANGED,
+  ERROR_CLEAR
 } from './types';
 
-// How to use AsyncStorage:
-// AsyncStorage.setItem('fb_token', token);
-// AsyncStorage.getItem('fb_token');
-
-// export const facebookLogin = ({email, phone, firstname, lastname }) => async dispatch => {
-  // let token = await AsyncStorage.getItem('fb_token');
-
-  // if (token) {
-    // Dispatch an action saying FB login is done
-    // dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
-  // } else {
-    // Start up FB Login process
-    // doFacebookLogin(dispatch, email, phone, firstname, lastname);
-  // }
-// };
 
 export const facebookSignin = () => {
 
     return async (dispatch) => {
+      console.log('facebook_Actions.js:line17:fbappid');
       console.log(fbappid);
       let { type, token } = await Facebook.logInWithReadPermissionsAsync(fbappid, {
         permissions: ['public_profile', 'email']
@@ -39,6 +26,7 @@ export const facebookSignin = () => {
         payload: 'checking'
       });
 
+      console.log('---credential---');
       console.log(credential);
       if (type === 'cancel') {
         dispatch({
@@ -49,9 +37,12 @@ export const facebookSignin = () => {
       }
 
       var credential = firebase.auth.FacebookAuthProvider.credential(token);
+
+      console.log('---token---');
       console.log(token);
 
       try {
+
         let user = await firebase.auth().signInWithCredential(credential);
         // write user properties to firebase
         firebase.database().ref(`/users/${user.uid}/userDetails`).update({
@@ -60,11 +51,10 @@ export const facebookSignin = () => {
           fbPhotoURL: user.photoURL
         });
 
-        let emailcheck = await firebase.database().ref(`/users/${user.uid}/userDetails`).once('email');
-        console.log("email check");
-        console.log(emailcheck);
-
+        let emailcheck = await firebase.database().ref(`/users/${user.uid}/userDetails/email`).once('value');
+        var emailcheckflag = emailcheck.val();
       } catch (error) {
+        console.log('fb_actions.js:line57:error');
         console.log(error);
         dispatch({
           type: LOGIN_STATUS_CHANGED,
@@ -72,7 +62,14 @@ export const facebookSignin = () => {
         });
       }
       // await AsyncStorage.setItem('fb_token', token);
-      dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+      if (emailcheckflag) {
+        dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+      } else {
+        // case where the user has signed in without signing up.
+        await firebase.auth().signOut();
+        dispatch({ type: ERROR_CLEAR, payload: 'Please Register first ...'});
+      }
+
   };
 
 };

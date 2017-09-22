@@ -4,7 +4,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import validator from 'validator';
-import { emailChanged, passwordChanged, loginUser, facebookSignin } from '../actions';
+import Modal from 'react-native-modal';
+import { emailChanged, passwordChanged, loginUser, facebookSignin, errorClear } from '../actions';
 import { FormLabel, FormInput, FormValidationMessage, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
 
 
@@ -80,6 +81,21 @@ class LoginScreen extends Component {
     return;
   }
 
+  renderModalContent = () => (
+    <View style={styles.modalContent}>
+      <Text>{this.props.error}</Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Close"
+          backgroundColor="#f50"
+          fontSize={20}
+          icon={{ type: 'font-awesome', color: "#ffffff", name: 'grav' }}
+          onPress={ () => this.props.errorClear('') }
+        />
+      </View>
+    </View>
+  );
+
   onNavPress = (screenname) => {
     this.props.navigation.navigate(screenname);
   }
@@ -131,10 +147,6 @@ class LoginScreen extends Component {
                 </View>
               </View>
 
-              <Text style={styles.errorTextStyle}>
-                {this.props.error}
-              </Text>
-
               <View style={styles.viewContainer}>
                 <Button
                   onPress={this.onButtonPress.bind(this)}
@@ -158,6 +170,9 @@ class LoginScreen extends Component {
               />
             </View>
         </View>
+        <Modal isVisible={this.props.error != ''} style={styles.bottomModal}>
+          {this.renderModalContent()}
+        </Modal>
 
       </KeyboardAwareScrollView>
     );
@@ -182,7 +197,19 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  bottomModal: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
 }
 
 
@@ -192,5 +219,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser, facebookSignin
+  emailChanged, passwordChanged, loginUser, facebookSignin, errorClear
 })(LoginScreen);

@@ -11,9 +11,16 @@ import {
   LOGOUT_USER,
   LOGIN_STATUS_CHANGED,
   LOAD_WELCOME_CHANGED,
-  SIGNUP_USER
+  SIGNUP_USER,
+  ERROR_CLEAR
 } from './types';
 
+export const errorClear = (text) => {
+  return {
+    type: ERROR_CLEAR,
+    payload: text
+  };
+};
 
 export const emailChanged = (text) => {
   return {
@@ -83,7 +90,8 @@ export const loginUser = ({ email, password }) => {
     }
     catch (error) {
       console.log(error);
-      loginUserFail(dispatch);
+      let err_message = error.message;
+      loginUserFail(dispatch, err_message);
     }
 
 
@@ -168,8 +176,11 @@ export const authStateChanged = () => {
 
 
 
-const loginUserFail = (dispatch) => {
-  dispatch({ type: LOGIN_USER_FAIL });
+const loginUserFail = (dispatch, err_message) => {
+  dispatch({
+    type: LOGIN_USER_FAIL,
+    payload: err_message
+  });
 };
 
 const loginUserSuccess = (dispatch, user) => {
