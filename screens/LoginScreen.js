@@ -88,8 +88,6 @@ class LoginScreen extends Component {
         <Button
           title="Close"
           backgroundColor="#f50"
-          fontSize={20}
-          icon={{ type: 'font-awesome', color: "#ffffff", name: 'grav' }}
           onPress={ () => this.props.errorClear('') }
         />
       </View>
@@ -170,7 +168,11 @@ class LoginScreen extends Component {
               />
             </View>
         </View>
-        <Modal isVisible={this.props.error != ''} style={styles.bottomModal}>
+        <Modal
+          isVisible={this.props.error != ''}
+          animationIn={'slideInLeft'}
+          animationOut={'slideOutRight'}
+          style={styles.bottomModal}>
           {this.renderModalContent()}
         </Modal>
 
