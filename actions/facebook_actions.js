@@ -60,6 +60,10 @@ export const facebookSignin = () => {
           fbPhotoURL: user.photoURL
         });
 
+        let emailcheck = await firebase.database().ref(`/users/${user.uid}/userDetails`).once('email');
+        console.log("email check");
+        console.log(emailcheck);
+
       } catch (error) {
         console.log(error);
         dispatch({
