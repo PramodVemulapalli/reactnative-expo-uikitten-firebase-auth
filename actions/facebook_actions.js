@@ -1,14 +1,14 @@
 // import { AsyncStorage } from 'react-native';
 import { Facebook } from 'expo';
 import firebase from 'firebase';
-import { fbappid } from './../consts';
+import { fbappid } from './../config/auth';
 // import { emailChanged, passwordChanged, signupUser } from '../actions';
 
 import {
   FACEBOOK_LOGIN_SUCCESS,
   FACEBOOK_LOGIN_FAIL,
   LOGIN_STATUS_CHANGED,
-  ERROR_CLEAR
+  ERROR_SET
 } from './types';
 
 
@@ -44,15 +44,19 @@ export const facebookSignin = () => {
       try {
 
         let user = await firebase.auth().signInWithCredential(credential);
-        // write user properties to firebase
-        firebase.database().ref(`/users/${user.uid}/userDetails`).update({
-          fbEmail: user.email,
-          fbDisplayName: user.displayName,
-          fbPhotoURL: user.photoURL
-        });
-
         let emailcheck = await firebase.database().ref(`/users/${user.uid}/userDetails/email`).once('value');
         var emailcheckflag = emailcheck.val();
+
+        if (emailcheckflag) {
+          // update user properties to firebase
+          firebase.database().ref(`/users/${user.uid}/userDetails`).update({
+            fbEmail: user.email,
+            fbDisplayName: user.displayName,
+            fbPhotoURL: user.photoURL
+          });
+
+        }
+
       } catch (error) {
         console.log('fb_actions.js:line57:error');
         console.log(error);
@@ -67,7 +71,7 @@ export const facebookSignin = () => {
       } else {
         // case where the user has signed in without signing up.
         await firebase.auth().signOut();
-        dispatch({ type: ERROR_CLEAR, payload: 'Please Register first ...'});
+        dispatch({ type: ERROR_SET, payload: 'Please Register first ...'});
       }
 
   };

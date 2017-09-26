@@ -5,15 +5,19 @@ import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
+import { Font } from 'expo';
+
 
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { LOGIN_STATUS_CHANGED } from './actions/types';
-import { config } from './consts';
+import { firebaseConfig } from './config/auth';
+import { bootstrap } from './config/bootstrap';
 
 import WelcomeScreen from './screens/WelcomeScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
+import Login_Screen from './screens/Login_Screen';
 import LoadingScreen from './screens/LoadingScreen';
 import MenuScreen from './screens/MenuScreen';
 import OrdersScreen from './screens/OrdersScreen';
@@ -28,13 +32,26 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+    bootstrap();
   }
 
   componentWillMount() {
 
-    console.log(config);
-    firebase.initializeApp(config);
+    console.log(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 
+  }
+
+  componentDidMount() {
+    Font.loadAsync({
+      'fontawesome': require('./assets/fonts/fontawesome.ttf'),
+      'icomoon': require('./assets/fonts/icomoon.ttf'),
+      'Righteous-Regular': require('./assets/fonts/Righteous-Regular.ttf'),
+      'Roboto-Bold': require('./assets/fonts/Roboto-Bold.ttf'),
+      'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
+      'Roboto-Medium': require('./assets/fonts/Roboto-Medium.ttf'),
+      'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+    });
   }
 
   render() {
@@ -44,6 +61,7 @@ export default class App extends React.Component {
       register_scr: { screen: RegisterScreen },
       profile_scr: { screen: ProfileScreen },
       login_scr: { screen: LoginScreen },
+      login_screen: { screen: Login_Screen},
       main_scr: {
           screen: TabNavigator({
             menu_scr: { screen: MenuScreen },

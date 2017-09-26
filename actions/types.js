@@ -9,7 +9,7 @@ export const LOGIN_USER = 'login_user';
 export const LOGOUT_USER = 'logout_user';
 export const LOGIN_STATUS_CHANGED = 'login_status_changed';
 export const SIGNUP_USER = 'signup_user';
-export const ERROR_CLEAR = 'error_clear';
+export const ERROR_SET = 'error_set';
 export const LOAD_WELCOME_CHANGED = 'load_welcome_changed';
 
 export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';

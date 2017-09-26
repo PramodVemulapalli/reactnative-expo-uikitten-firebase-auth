@@ -11,7 +11,7 @@ import {
   LOGIN_STATUS_CHANGED,
   LOAD_WELCOME_CHANGED,
   SIGNUP_USER,
-  ERROR_CLEAR
+  ERROR_SET
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -38,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, firstname: action.payload };
     case LASTNAME_CHANGED:
       return { ...state, lastname: action.payload };
-    case ERROR_CLEAR:
+    case ERROR_SET:
       return { ...state, error: action.payload };
     case LOGIN_USER:
       return { ...state, error: '' };

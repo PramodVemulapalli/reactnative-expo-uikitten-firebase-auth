@@ -12,12 +12,12 @@ import {
   LOGIN_STATUS_CHANGED,
   LOAD_WELCOME_CHANGED,
   SIGNUP_USER,
-  ERROR_CLEAR
+  ERROR_SET
 } from './types';
 
-export const errorClear = (text) => {
+export const errorSet = (text) => {
   return {
-    type: ERROR_CLEAR,
+    type: ERROR_SET,
     payload: text
   };
 };

@@ -15,10 +15,16 @@
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-modal": "^4.0.0",
     "react-native-swiper": "^1.5.10",
+    "react-native-ui-kitten": "^2.0.1",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "validator": "^8.2.0"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
   }
 }

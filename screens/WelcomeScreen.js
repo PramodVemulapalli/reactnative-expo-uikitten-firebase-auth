@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import firebase from 'firebase';
 import { Button } from 'react-native-elements';
+import ErrorMessage from './../components/ErrorMessage';
 import Modal from 'react-native-modal';
-import { errorClear } from '../actions';
 import { AppLoading } from 'expo';
 
 
@@ -15,27 +15,9 @@ class WelcomeScreen extends Component {
     header: null
   };
 
-
   onNavPress = (screenname) => {
     this.props.navigation.navigate(screenname);
   };
-
-
-  renderModalContent = () => (
-    <View style={styles.modalContent}>
-      <Text>{this.props.error}</Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Close"
-          backgroundColor="#f50"
-          fontSize={20}
-          icon={{ type: 'font-awesome', color: "#ffffff", name: 'grav' }}
-          onPress={ () => this.props.errorClear('') }
-        />
-      </View>
-    </View>
-  );
-
 
 
   render() {
@@ -52,44 +34,44 @@ class WelcomeScreen extends Component {
             paginationStyle={{ bottom: 70 }}
           >
             <View style={styles.slide1}>
-              <Text style={styles.headertext}> Consumer App </Text>
-              <Text style={styles.text}>But I promised I would do it,</Text>
+              <Text style={styles.headertext}> Online Shop </Text>
+              <Text style={styles.text}>We have quality stuff</Text>
             </View>
             <View style={styles.slide2}>
-              <Text style={styles.headertext}> Consumer App </Text>
-              <Text style={styles.text}>and he thought it might be so</Text>
+              <Text style={styles.headertext}> Online Shop </Text>
+              <Text style={styles.text}>Great value for money</Text>
             </View>
             <View style={styles.slide3}>
-              <Text style={styles.headertext}> Consumer App </Text>
-              <Text style={styles.text}>If it came from one that loved him,</Text>
+              <Text style={styles.headertext}> Online Shop </Text>
+              <Text style={styles.text}>Awesome customer support</Text>
             </View>
             <View style={styles.slide4}>
-              <Text style={styles.headertext}> Consumer App </Text>
-              <Text style={styles.text}>perhaps it would ease the blow.</Text>
+              <Text style={styles.headertext}> Online Shop </Text>
+              <Text style={styles.text}>Fast delivery</Text>
             </View>
           </Swiper>
         </View>
         <View style={styles.buttongroup}>
           <View style={styles.buttonStyle1}>
             <Button
-              onPress={() => this.onNavPress('login_scr')}
-              backgroundColor="#003399"
+              onPress={() => this.onNavPress('login_screen')}
+              backgroundColor="#35b729"
               title="Login"
               color="#ffffff"
+              fontSize={18}
             />
           </View>
           <View style={styles.buttonStyle2}>
             <Button
               onPress={() => this.onNavPress('profile_scr')}
-              backgroundColor="#f50"
+              backgroundColor="#000000"
               title="Register"
               color="#ffffff"
+              fontSize={18}
             />
           </View>
         </View>
-        <Modal isVisible={this.props.error != ''} style={styles.bottomModal}>
-          {this.renderModalContent()}
-        </Modal>
+        <ErrorMessage />
       </View>
 
     );
@@ -125,37 +107,37 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#003399'
+    backgroundColor: '#35b729'
   },
   buttonStyle2: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f50'
+    backgroundColor: '#000000'
   },
   slide1: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#003399'
+    backgroundColor: '#35b729'
   },
   slide2: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f50'
+    backgroundColor: '#000000'
   },
   slide3: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#003399'
+    backgroundColor: '#35b729'
   },
   slide4: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f50'
+    backgroundColor: '#000000'
   },
   headertext: {
     color: '#fff',
@@ -165,17 +147,9 @@ const styles = {
   },
   text: {
     color: '#fff',
-    fontSize: 24,
-    fontWeight: 'normal',
+    fontSize: 18,
     margin: 20
-  }
+  },
 }
 
-const mapStateToProps = ({ auth }) => {
-  const { error } = auth;
-  return { error };
-};
-
-export default connect(mapStateToProps, {
-  errorClear
-})(WelcomeScreen);
+export default WelcomeScreen;

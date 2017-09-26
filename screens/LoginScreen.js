@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import firebase from 'firebase';
 import validator from 'validator';
 import Modal from 'react-native-modal';
-import { emailChanged, passwordChanged, loginUser, facebookSignin, errorClear } from '../actions';
+import ErrorMessage from './../components/ErrorMessage';
+import { emailChanged, passwordChanged, loginUser, facebookSignin } from '../actions';
 import { FormLabel, FormInput, FormValidationMessage, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
 
 
@@ -81,19 +82,6 @@ class LoginScreen extends Component {
     return;
   }
 
-  renderModalContent = () => (
-    <View style={styles.modalContent}>
-      <Text>{this.props.error}</Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Close"
-          backgroundColor="#f50"
-          onPress={ () => this.props.errorClear('') }
-        />
-      </View>
-    </View>
-  );
-
   onNavPress = (screenname) => {
     this.props.navigation.navigate(screenname);
   }
@@ -106,6 +94,7 @@ class LoginScreen extends Component {
         <View style={styles.buttonContainer}>
           <SocialIcon
               title="Sign In With Facebook"
+              fontSize="18"
               button
               fontWeight="400"
               type="facebook"
@@ -113,11 +102,11 @@ class LoginScreen extends Component {
             />
         </View>
         <View style={styles.orView}>
-          <Text> - or - </Text>
+          <Text style={{fontSize: 18 }}> - or - </Text>
         </View>
         <View>
               <View style={{ marginBottom: 10 }}>
-                <FormLabel>Enter Email</FormLabel>
+                <FormLabel fontSize={18} >Enter Email</FormLabel>
                 <FormInput
                   value={this.props.email}
                   onChangeText={email => this.onEmailChange(email)}
@@ -155,26 +144,21 @@ class LoginScreen extends Component {
 
         </View>
         <View style={styles.orView}>
-          <Text> - or - </Text>
+          <Text style={{fontSize: 18 }}> - or - </Text>
         </View>
         <View>
             <View style={styles.buttonContainer}>
               <Button
                 title="Register"
-                backgroundColor="#f50"
-                fontSize={20}
+                backgroundColor="#35b729"
+                fontSize={18}
                 icon={{ type: 'font-awesome', color: "#ffffff", name: 'grav' }}
                 onPress={ () => this.onNavPress('profile_scr') }
               />
             </View>
         </View>
-        <Modal
-          isVisible={this.props.error != ''}
-          animationIn={'slideInLeft'}
-          animationOut={'slideOutRight'}
-          style={styles.bottomModal}>
-          {this.renderModalContent()}
-        </Modal>
+        <ErrorMessage />
+
 
       </KeyboardAwareScrollView>
     );
@@ -198,28 +182,16 @@ const styles = {
     margin: 10,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  bottomModal: {
-    justifyContent: 'flex-end',
-    margin: 0,
   },
 }
 
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, user } = auth;
-  return { email, password, error, user };
+  const { email, password, user } = auth;
+  return { email, password, user };
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser, facebookSignin, errorClear
+  emailChanged, passwordChanged, loginUser, facebookSignin
 })(LoginScreen);
