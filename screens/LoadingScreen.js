@@ -39,7 +39,7 @@ class LoadingScreen extends Component {
 
     if (props.loginStatus == 'notloggedin') {
       console.log('Loading Screen: navigate to Welcome Screen');
-      this.props.navigation.navigate('welcome_scr');
+      this.props.navigation.navigate('welcome_screen');
     }
 
   }

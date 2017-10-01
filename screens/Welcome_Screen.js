@@ -70,9 +70,9 @@ class WelcomeScreen extends Component {
               fontSize={18}
             />
           </View>
-          <View style={styles.buttonStyle2}>
+          <View style={styles.buttonStyle3}>
             <Button
-              onPress={() => this.onNavPress('welcome_screen')}
+              onPress={() => this.onNavPress('welcome_scr')}
               backgroundColor="#000000"
               title="Regis"
               color="#ffffff"
@@ -123,6 +123,12 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000000'
+  },
+  buttonStyle3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF'
   },
   slide1: {
     flex: 1,

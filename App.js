@@ -14,14 +14,18 @@ import { LOGIN_STATUS_CHANGED } from './actions/types';
 import { firebaseConfig } from './config/auth';
 import { bootstrap } from './config/bootstrap';
 
+import WalkthroughScreen from './screens/WalkthroughScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import Register_Screen from './screens/Register_Screen';
+import fbRegister_Screen from './screens/fbRegister_Screen';
 import LoginScreen from './screens/LoginScreen';
 import Login_Screen from './screens/Login_Screen';
 import LoadingScreen from './screens/LoadingScreen';
 import MenuScreen from './screens/MenuScreen';
 import OrdersScreen from './screens/OrdersScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import Profile_Screen from './screens/Profile_Screen';
 import SettingsScreen from './screens/SettingsScreen';
 
 
@@ -57,9 +61,13 @@ export default class App extends React.Component {
   render() {
     const MainNavigator = StackNavigator({
       loading_scr: { screen: LoadingScreen },
+      welcome_screen: { screen: WalkthroughScreen },
       welcome_scr: { screen: WelcomeScreen },
       register_scr: { screen: RegisterScreen },
+      register_screen: { screen: Register_Screen },
+      fbregister_screen: { screen: fbRegister_Screen },
       profile_scr: { screen: ProfileScreen },
+      profile_screen: { screen: Profile_Screen },
       login_scr: { screen: LoginScreen },
       login_screen: { screen: Login_Screen},
       main_scr: {

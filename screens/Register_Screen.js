@@ -5,7 +5,7 @@ import Login from './../components/Login';
 import { facebookSignin } from '../actions';
 
 
-class Login_Screen extends Component {
+class Register_Screen extends Component {
 
   static navigationOptions = {
     header: null,
@@ -14,12 +14,12 @@ class Login_Screen extends Component {
   render() {
       return (
           <Login
-            emailPwdBtnStr='SignIn'
-            fbBtnStr='Facebook Signin'
+            emailPwdBtnStr='SignUp'
+            fbBtnStr='Facebook SignUp'
             showEmailPwdOption={true}
-            onNavString1='Don’t have an account?'
-            onNavString2=' Sign Up now'
-            onNavPress={ () => { this.props.navigation.navigate('profile_screen'); } }
+            onNavString1='Already have an account?'
+            onNavString2=' Sign In now'
+            onNavPress={ () => { this.props.navigation.navigate('login_screen'); } }
           />
       )
   }
@@ -27,4 +27,4 @@ class Login_Screen extends Component {
 
 export default connect(null, {
   facebookSignin
-})(Login_Screen);
+})(Register_Screen);
