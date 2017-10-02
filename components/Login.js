@@ -23,14 +23,18 @@ import {scale, scaleModerate, scaleVertical} from './../utils/scale';
 class Login extends Component {
 
   constructor(props) {
+
     super(props)
 
     this.state = {
+
       emailError: '',
       passwordError: '',
       emailFlag: 0,
       passwordFlag: 0,
-      keyboardflag: false
+      keyboardflag: false,
+      showEmailPwdState: false
+
     }
 
     if (Platform.OS === 'android') {
@@ -40,33 +44,43 @@ class Login extends Component {
   }
 
   componentWillMount () {
+
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
+
     if ( this.props.email != '') {
       this.validateInput('email', this.props.email);
     }
+
     if ( this.props.password != '') {
       this.validateInput('password', this.props.password);
     }
+
   }
 
   componentWillUnmount () {
+
    this.keyboardDidShowListener.remove();
    this.keyboardDidHideListener.remove();
+
   }
 
   _keyboardDidShow () {
+
     if ( true ) {  // Platform.OS === 'android'
       LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     }
     this.setState({ keyboardflag: true });
+
   }
 
   _keyboardDidHide () {
+
     if ( true ) { // Platform.OS === 'android'
       LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     }
     this.setState({ keyboardflag: false });
+
   }
 
   onEmailChange(text) {
@@ -79,6 +93,7 @@ class Login extends Component {
   }
 
   onButtonPress() {
+
     if ( this.validateInput('email', this.props.email) && this.validateInput('password', this.props.password)) {
       const { email, password, phone, firstname, lastname } = this.props;
       if (this.props.emailPwdBtnStr == 'SignIn') {
@@ -89,6 +104,7 @@ class Login extends Component {
     } else {
       this.props.errorSet('Please provide a valid email and password');
     }
+
   }
 
   // Validate the form inputs
@@ -121,6 +137,7 @@ class Login extends Component {
 
   // Display form validation errors if needed
   renderFormError(inputName) {
+
     if (inputName == 'email') {
       if (this.state.emailError !='') {
         return (<RkText rkType='danger'>{this.state.emailError}</RkText>);
@@ -140,7 +157,6 @@ class Login extends Component {
 
 
   _renderImage(image) {
-
     if ( this.state.keyboardflag == false ) { // Platform.OS === 'ios' ||
       let contentHeight = scaleModerate(375, 1);
       let height = Dimensions.get('window').height - contentHeight;
@@ -161,7 +177,7 @@ class Login extends Component {
 
   _renderEmailPwdOption() {
 
-    if (this.props.showEmailPwdOption) {
+    if (this.props.showEmailPwdOption || this.state.showEmailPwdState ) {
 
       return (
 
@@ -251,6 +267,75 @@ class Login extends Component {
     }
   }
 
+  _footerButton() {
+
+    if (!this.props.showEmailPwdOption) {
+      if (!this.state.showEmailPwdState) {
+        // In the case when we have the register screen and the show email-pwd option button is pressed
+        // console.log('We are in the register signup screen and we want to show the email pwd option');
+        this.setState({ showEmailPwdState: true });
+        return;
+      }
+    }
+    // In the other two cases we should navigate
+    // case 1: we are in the login screen
+    // case 2: we are in the register screen and the email-pwd option button is pressed
+    // console.log('We are not in the register signup screen and so we should navigate');
+    this.props.onNavPress();
+
+  }
+
+  _renderFooter() {
+
+    let android_s_c_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'flex-end'; // Platform.OS === 'android' &&
+    if (!this.props.showEmailPwdOption && !this.state.showEmailPwdState) {
+        android_s_c_justifyContent = 'flex-start';
+    }
+    let android_styles_footer = {justifyContent: android_s_c_justifyContent};
+
+    if (!this.props.showEmailPwdOption  && !this.state.showEmailPwdState) {
+        // In the case when we are on register screen and the show email-pwd button is not pressed
+        // console.log('show email password option');
+        return (
+        <View style={{...styles.footer, ...android_styles_footer}}>
+          <View style={styles.textRow}>
+          <RkButton
+              rkType='clear'
+              onPress={ () => { this._footerButton() } }>
+              <RkText rkType='primary3'>
+                {'Show email-password option'}
+              </RkText>
+              <RkText rkType='header6'>
+                {''}
+              </RkText>
+            </RkButton>
+          </View>
+        </View>
+      );
+    } else {
+      // In the other cases
+      // If we are on the login screen or
+      // If we are on the register screen and the show email-pwd button is pressed
+      // console.log('show parent props option');
+      return (
+        <View style={{...styles.footer, ...android_styles_footer}}>
+          <View style={styles.textRow}>
+          <RkButton
+              rkType='clear'
+              onPress={ () => { this._footerButton() } }>
+              <RkText rkType='primary3'>
+                {this.props.onNavString1}
+              </RkText>
+              <RkText rkType='header6'>
+                {this.props.onNavString2}
+              </RkText>
+            </RkButton>
+          </View>
+        </View>
+      );
+    }
+  }
+
   /*
   <RkAvoidKeyboard
     onStartShouldSetResponder={ (e) => true}
@@ -259,14 +344,10 @@ class Login extends Component {
   */
 
   render() {
+
       let image = this._renderImage();
       let android_s_c_marginTop = (this.state.keyboardflag) ? 30 : 0; // Platform.OS === 'android' &&
       let android_styles_container = {marginTop: android_s_c_marginTop};
-      let android_s_c_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'flex-end'; // Platform.OS === 'android' &&
-      if (!this.props.showEmailPwdOption) {
-          android_s_c_justifyContent = 'flex-start';
-      }
-      let android_styles_footer = {justifyContent: android_s_c_justifyContent};
 
       // console.log(android_styles_footer);
 
@@ -277,26 +358,12 @@ class Login extends Component {
           {this._renderImage()}
 
           <View style = {{...styles.container, ...android_styles_container}}>
-
             {this._renderFacebook()}
             {this._renderEmailPwdOption()}
-
-            <View style={{...styles.footer, ...android_styles_footer}}>
-              <View style={styles.textRow}>
-              <RkButton
-                  rkType='clear'
-                  onPress={ () => {this.props.onNavPress()} }>
-                  <RkText rkType='primary3'>{this.props.onNavString1}</RkText>
-                  <RkText rkType='header6'>
-                    {this.props.onNavString2}
-                  </RkText>
-                </RkButton>
-              </View>
-            </View>
-
-
+            {this._renderFooter()}
           </View>
           <ErrorMessage />
+
         </View>
       )
   }

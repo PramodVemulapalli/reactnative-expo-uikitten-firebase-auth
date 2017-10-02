@@ -16,9 +16,9 @@ class fbRegister_Screen extends Component {
           <Login
             emailPwdBtnStr='SignUp'
             fbBtnStr='Facebook SignUp'
-            showEmailPwdOption={false}
-            onNavString1='Switch to email-password option'
-            onNavString2=''
+            showEmailPwdOption={false} // the email password option will be hidden 
+            onNavString1='Already have an account?'
+            onNavString2='Sign In now'
             onNavPress={ () => { this.props.navigation.navigate('register_screen'); } }
           />
       )
