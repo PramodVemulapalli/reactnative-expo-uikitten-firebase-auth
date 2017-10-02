@@ -20,6 +20,7 @@ class Login_Screen extends Component {
             onNavString1='Don’t have an account?'
             onNavString2=' Sign Up now'
             onNavPress={ () => { this.props.navigation.navigate('profile_screen'); } }
+            onForgotPassword={ () => { this.props.navigation.navigate('reset_screen'); } }
           />
       )
   }

@@ -11,8 +11,10 @@ import {
   LOGOUT_USER,
   LOGIN_STATUS_CHANGED,
   LOAD_WELCOME_CHANGED,
+  EMAIL_RESET_CHANGED,
   SIGNUP_USER,
-  ERROR_SET
+  ERROR_SET,
+  RESET_USER
 } from './types';
 
 export const errorSet = (text) => {
@@ -25,6 +27,13 @@ export const errorSet = (text) => {
 export const emailChanged = (text) => {
   return {
     type: EMAIL_CHANGED,
+    payload: text
+  };
+};
+
+export const emailResetChanged = (text) => {
+  return {
+    type: EMAIL_RESET_CHANGED,
     payload: text
   };
 };
@@ -96,6 +105,27 @@ export const loginUser = ({ email, password }) => {
 
 
   };
+};
+
+export const resetUser = ({ email }) => {
+
+  return async (dispatch) => {
+      try {
+        await firebase.auth().sendPasswordResetEmail(email);
+        dispatch({
+          type: ERROR_SET,
+          payload: 'Reset Email Sent'
+        });
+      } catch (error) {
+        console.log(error);
+        let err_message = error.message;
+        dispatch({
+          type: ERROR_SET,
+          payload: err_message
+        });
+      }
+  };
+
 };
 
 export const logoutUser = () => {

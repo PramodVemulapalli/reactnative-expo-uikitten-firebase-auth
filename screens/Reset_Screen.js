@@ -12,7 +12,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import validator from 'validator';
-import { emailChanged, phoneChanged, firstnameChanged, lastnameChanged, errorSet } from '../actions';
+import { emailResetChanged, errorSet, resetUser } from '../actions';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import ErrorMessage from './../components/ErrorMessage';
@@ -30,7 +30,7 @@ import {
 } from 'react-native-ui-kitten';
 import {GradientButton} from './../components/';
 
-class ProfileScreen extends Component {
+class Reset_Screen extends Component {
 
   constructor(props) {
 
@@ -38,13 +38,7 @@ class ProfileScreen extends Component {
 
     this.state = {
       emailError: '',
-      firstnameError: '',
-      lastnameError: '',
-      phoneError: '',
       emailFlag: 0,
-      phoneFlag: 0,
-      firstnameFlag: 0,
-      lastnameFlag: 0,
       keyboardflag: false,
       loadingState: false,
     }
@@ -85,33 +79,17 @@ class ProfileScreen extends Component {
 
   // Call action if the value is changed
 
-  onEmailChange(text) {
-    this.props.emailChanged(text);
-  }
-
-  onPhoneChange(text) {
-    this.props.phoneChanged(text);
-  }
-
-  onFirstnameChange(text) {
-    this.props.firstnameChanged(text);
-  }
-
-  onLastnameChange(text) {
-    this.props.lastnameChanged(text);
+  onemailResetChange(text) {
+    this.props.emailResetChanged(text);
   }
 
   onButtonPress() {
-    this.setState({ loadingState: true });
-    if (this.validateInput('firstname', this.props.firstname)
-        && this.validateInput('lastname', this.props.lastname)
-        && this.validateInput('email', this.props.email)
-        && this.validateInput('phone', this.props.phone)) {
-        this.props.navigation.navigate('fbregister_screen')
-    } else {
-        this.props.errorSet('Please provide valid profile inputs');
+    // this.setState({ loadingState: true });
+    if (this.validateInput('emailReset', this.props.emailReset)) {
+        this.props.resetUser({email: this.props.emailReset});
+        this.props.navigation.navigate('Welcome_screen');
     }
-    this.setState({ loadingState: false });
+    // this.setState({ loadingState: false });
     Keyboard.dismiss();
   }
 
@@ -119,7 +97,7 @@ class ProfileScreen extends Component {
   validateInput(inputName, inputVal) {
 
     console.log('profile_screen:line114:' + inputName + ' ' + inputVal);
-    if (inputName == 'email') {
+    if (inputName == 'emailReset') {
       if (validator.isEmail(inputVal)){
         this.setState({ emailError: '' });
         this.setState({ emailFlag: 1 });
@@ -127,42 +105,6 @@ class ProfileScreen extends Component {
       } else {
         this.setState({ emailError: 'Please enter a valid email address'});
         this.setState({ emailFlag: 0 });
-        return false;
-      }
-    }
-
-    if (inputName == 'phone') {
-      if (validator.isMobilePhone(inputVal, 'en-US')){
-        this.setState({ phoneError: '' });
-        this.setState({ phoneFlag: 1 });
-        return true;
-      } else {
-        this.setState({ phoneError: 'Please enter a valid phone number'});
-        this.setState({ phoneFlag: 0 });
-        return false;
-      }
-    }
-
-    if (inputName == 'firstname') {
-      if (validator.isAscii(inputVal)){
-        this.setState({ firstnameError: '' });
-        this.setState({ firstnameFlag: 1 });
-        return true;
-      } else {
-        this.setState({ firstnameError: 'Please enter your First Name'});
-        this.setState({ firstnameFlag: 0 });
-        return false;
-      }
-    }
-
-    if (inputName == 'lastname') {
-      if (validator.isAscii(inputVal)){
-        this.setState({ lastnameError: '' });
-        this.setState({ lastnameFlag: 1 });
-        return true;
-      } else {
-        this.setState({ lastnameError: 'Please enter your Last Name'});
-        this.setState({ lastnameFlag: 0 });
         return false;
       }
     }
@@ -186,21 +128,6 @@ class ProfileScreen extends Component {
         return (<RkText rkType='danger'> {this.state.emailError} </RkText>);
       }
     }
-    if (inputName == 'phone') {
-      if (this.state.phoneError !='') {
-        return (<RkText rkType='danger'> {this.state.phoneError} </RkText>);
-      }
-    }
-    if (inputName == 'firstname') {
-      if (this.state.firstnameError !='') {
-        return (<RkText rkType='danger'> {this.state.firstnameError} </RkText>);
-      }
-    }
-    if (inputName == 'lastname') {
-      if (this.state.lastnameError !='') {
-        return (<RkText rkType='danger'> {this.state.lastnameError} </RkText>);
-      }
-    }
     return;
   }
 
@@ -210,18 +137,17 @@ class ProfileScreen extends Component {
 
   render() {
 
+
+    let keyboardUp_image = (this.state.keyboardflag) ? -1 : 1;
+    let keyboardUp_image_content = { flex: keyboardUp_image };
+
     let renderIcon = () => {
-      if (RkTheme.current.name === 'light' && this.state.keyboardflag == false ) {
         return (
-          <View style={{alignItems: 'center'}}>
+          <View style={{ ...styles.imageStyle, ...keyboardUp_image_content }}>
             <Image style={styles.image} source={require('./../assets/images/cartLogo.png')}/>
             <RkText rkType='h1'>Registration</RkText>
           </View>
           );
-        }
-        else {
-          return;
-        }
     };
 
     let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-around';
@@ -236,52 +162,26 @@ class ProfileScreen extends Component {
           <View>
             <RkTextInput
               rkType='rounded'
-              placeholder='First Name ( John )'
-              value={this.props.firstname}
-              onChangeText={firstname => this.onFirstnameChange(firstname)}
-              onBlur={() => { this.validateInput('firstname', this.props.firstname); }}
-            />
-            <View>
-              { this.renderFormError('firstname') }
-            </View>
-            <RkTextInput
-              rkType='rounded'
-              placeholder='Last Name ( Doe )'
-              value={this.props.lastname}
-              onChangeText={lastname => this.onLastnameChange(lastname)}
-              onBlur={() => { this.validateInput('lastname', this.props.lastname); }}
-            />
-            <View>
-              { this.renderFormError('lastname') }
-            </View>
-            <RkTextInput
-              rkType='rounded'
               placeholder='Email ( John.Doe@gmail.com )'
-              value={this.props.email}
-              onChangeText={email => this.onEmailChange(email)}
-              onBlur={() => { this.validateInput('email', this.props.email); }}
+              value={this.props.emailReset}
+              onChangeText={emailReset => this.onemailResetChange(emailReset)}
+              onBlur={() => { this.validateInput('email', this.props.emailReset); }}
             />
             <View>
-              { this.renderFormError('email') }
+              { this.renderFormError('emailReset') }
             </View>
-            <RkTextInput
-              rkType='rounded'
-              placeholder='Phone ( 8143217654 )'
-              value={this.props.phone}
-              onChangeText={phone => this.onPhoneChange(phone)}
-              onBlur={() => { this.validateInput('phone', this.props.phone); }}
-            />
-            <View>
-              { this.renderFormError('phone') }
-            </View>
-            <GradientButton
-              style={styles.save}
-              rkType='large'
-              text='Proceed to Register'
-              onPress={() => {
-                this.onButtonPress();
-              }}/>
+
           </View>
+        </View>
+
+        <View style={{ ...styles.buttonStyle, ...keyboardUp_image_content }}>
+          <GradientButton
+            style={styles.save}
+            rkType='large'
+            text='Reset to Email'
+            onPress={() => {
+              this.onButtonPress();
+            }}/>
           <View style={styles.footer}>
             <View style={styles.textRow}>
               <RkButton rkType='clear'  onPress={() => this.props.navigation.navigate('login_screen')}>
@@ -291,8 +191,6 @@ class ProfileScreen extends Component {
             </View>
           </View>
         </View>
-        {this.renderSpinner()}
-
 
 
         <ErrorMessage />
@@ -311,6 +209,13 @@ let styles = RkStyleSheet.create(theme => ({
     justifyContent: 'space-around',
     backgroundColor: theme.colors.screen.base
   },
+  imageStyle: {
+    alignItems: 'center',
+    marginTop: 20
+  },
+  buttonStyle: {
+    justifyContent: 'flex-end'
+  },
   image: {
     marginBottom: 10,
     height:scaleVertical(77),
@@ -318,6 +223,7 @@ let styles = RkStyleSheet.create(theme => ({
   },
   content: {
     justifyContent: 'flex-start',
+    marginTop: 20
   },
   save: {
     marginVertical: 20
@@ -338,10 +244,10 @@ let styles = RkStyleSheet.create(theme => ({
 }));
 
 const mapStateToProps = ({ auth }) => {
-  const { email, phone, firstname, lastname, error } = auth;
-  return { email, phone, firstname, lastname, error };
+  const { emailReset } = auth;
+  return { emailReset };
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, phoneChanged, firstnameChanged, lastnameChanged, errorSet
-})(ProfileScreen);
+  emailResetChanged, resetUser, errorSet
+})(Reset_Screen);

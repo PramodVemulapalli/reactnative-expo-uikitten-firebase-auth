@@ -45,9 +45,11 @@ class Login extends Component {
 
   componentWillMount () {
 
+    // set listeners on when the keyboard is up or down
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
 
+    // Populate the text inputs if you already have values for them
     if ( this.props.email != '') {
       this.validateInput('email', this.props.email);
     }
@@ -60,6 +62,7 @@ class Login extends Component {
 
   componentWillUnmount () {
 
+    // remove the listeners upon exit
    this.keyboardDidShowListener.remove();
    this.keyboardDidHideListener.remove();
 
@@ -67,6 +70,7 @@ class Login extends Component {
 
   _keyboardDidShow () {
 
+    // use the spring animation when the key board is shown
     if ( true ) {  // Platform.OS === 'android'
       LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     }
@@ -76,6 +80,7 @@ class Login extends Component {
 
   _keyboardDidHide () {
 
+    // use the spring animation when the key board is hidden
     if ( true ) { // Platform.OS === 'android'
       LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     }
@@ -178,7 +183,7 @@ class Login extends Component {
   _renderEmailPwdOption() {
 
     if (this.props.showEmailPwdOption || this.state.showEmailPwdState ) {
-
+      // In the case of login screen or if the email pwd button is pressed
       return (
 
         <View style = {{...styles.emailPwdContainer}}>
@@ -216,6 +221,7 @@ class Login extends Component {
             style={styles.save}
             text={this.props.emailPwdBtnStr}>
           </GradientButton>
+
 
         </View>
 
@@ -267,8 +273,28 @@ class Login extends Component {
     }
   }
 
+  _renderForgotPassword() {
+
+    if (this.props.emailPwdBtnStr='SignIn') {
+      let android_forgot_pwd = { marginTop: 10, marginBottom: 5 } ;
+      return (
+        <View style={{...styles.textRow, ...android_forgot_pwd}}>
+          <RkButton
+              rkType='clear'
+              onPress={ () => { this.props.onForgotPassword() } }>
+              <RkText rkType='primary3'>
+                {'Forgot your password'}
+              </RkText>
+          </RkButton>
+        </View>
+
+      );
+    }
+  }
+
   _footerButton() {
 
+    console.log('footerButton');
     if (!this.props.showEmailPwdOption) {
       if (!this.state.showEmailPwdState) {
         // In the case when we have the register screen and the show email-pwd option button is pressed
@@ -319,6 +345,7 @@ class Login extends Component {
       // console.log('show parent props option');
       return (
         <View style={{...styles.footer, ...android_styles_footer}}>
+          { this._renderForgotPassword() }
           <View style={styles.textRow}>
           <RkButton
               rkType='clear'
@@ -337,6 +364,7 @@ class Login extends Component {
   }
 
   /*
+  // This code is to be used if the RkAvoidKeyboard method starts working in Android
   <RkAvoidKeyboard
     onStartShouldSetResponder={ (e) => true}
     onResponderRelease={ (e) => Keyboard.dismiss()}
@@ -362,6 +390,8 @@ class Login extends Component {
             {this._renderEmailPwdOption()}
             {this._renderFooter()}
           </View>
+
+
           <ErrorMessage />
 
         </View>

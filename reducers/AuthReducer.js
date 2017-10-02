@@ -10,12 +10,14 @@ import {
   LOGOUT_USER,
   LOGIN_STATUS_CHANGED,
   LOAD_WELCOME_CHANGED,
+  EMAIL_RESET_CHANGED,
   SIGNUP_USER,
   ERROR_SET
 } from '../actions/types';
 
 const INITIAL_STATE = {
   email: '',
+  emailReset: '',
   password: '',
   phone: '',
   firstname: '',
@@ -30,6 +32,8 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case EMAIL_CHANGED:
       return { ...state, email: action.payload };
+    case EMAIL_RESET_CHANGED:
+      return { ...state, emailReset: action.payload };
     case PASSWORD_CHANGED:
       return { ...state, password: action.payload };
     case PHONE_CHANGED:

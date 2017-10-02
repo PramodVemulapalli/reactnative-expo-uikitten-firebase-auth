@@ -26,6 +26,7 @@ import MenuScreen from './screens/MenuScreen';
 import OrdersScreen from './screens/OrdersScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import Profile_Screen from './screens/Profile_Screen';
+import Reset_Screen from './screens/Reset_Screen';
 import SettingsScreen from './screens/SettingsScreen';
 
 
@@ -65,6 +66,7 @@ export default class App extends React.Component {
       welcome_scr: { screen: WelcomeScreen },
       register_scr: { screen: RegisterScreen },
       register_screen: { screen: Register_Screen },
+      reset_screen: { screen: Reset_Screen },
       fbregister_screen: { screen: fbRegister_Screen },
       profile_scr: { screen: ProfileScreen },
       profile_screen: { screen: Profile_Screen },
