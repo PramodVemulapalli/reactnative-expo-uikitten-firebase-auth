@@ -176,6 +176,7 @@ class Login extends Component {
 
   _fbBtnPressType() {
     if (this.props.emailPwdBtnStr == 'SignIn') {
+      console.log('SignIn button pressed');
       this.props.facebookSignin();
     }
   }

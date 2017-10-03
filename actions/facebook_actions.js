@@ -60,9 +60,14 @@ export const facebookSignin = () => {
       } catch (error) {
         console.log('fb_actions.js:line57:error');
         console.log(error);
+        let err_message = error.message;
         dispatch({
           type: LOGIN_STATUS_CHANGED,
           payload: 'notloggedin'
+        });
+        dispatch({
+          type: ERROR_SET,
+          payload: err_message
         });
       }
       // await AsyncStorage.setItem('fb_token', token);
@@ -121,12 +126,21 @@ export const facebookSignup = ({ email, phone, firstname, lastname  }) => {
           fbDisplayName: user.displayName,
           fbPhotoURL: user.photoURL
         });
+        dispatch({
+          type: ERROR_SET,
+          payload: 'Welcome to our online shop'
+        });
 
       } catch (error) {
         console.log(error);
         dispatch({
           type: LOGIN_STATUS_CHANGED,
           payload: 'notloggedin'
+        });
+        let err_message = error.message;
+        dispatch({
+          type: ERROR_SET,
+          payload: err_message
         });
       }
       // await AsyncStorage.setItem('fb_token', token);

@@ -96,6 +96,7 @@ export const loginUser = ({ email, password }) => {
       let user = await firebase.auth().signInWithEmailAndPassword(email, password);
       console.log('user logged successfully');
       loginUserSuccess(dispatch, user);
+
     }
     catch (error) {
       console.log(error);
@@ -176,6 +177,10 @@ export const signupUser = ({ email, password, phone, firstname, lastname  }) => 
       });
       console.log(user);
       loginUserSuccess(dispatch, user);
+      dispatch({
+        type: ERROR_SET,
+        payload: 'Welcome to our Online Shop'
+      });
     }
     catch (error) {
       console.log(error);

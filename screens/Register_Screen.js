@@ -12,7 +12,7 @@ class Register_Screen extends Component {
   };
 
   render() {
-    console.log('Register_Screen:Line 15: Rendering Register_Screen');
+    console.log('Register_Screen:Line 30: Rendering WalkthroughScreen');
       return (
           <Login
             emailPwdBtnStr='SignUp'
