@@ -107,7 +107,7 @@ class Login extends Component {
         this.props.signupUser({ email, password, phone, firstname, lastname });
       }
     } else {
-      this.props.errorSet('Please provide a valid email and password');
+      this.props.errorSet('Please provide a valid inputs');
     }
 
   }
@@ -275,7 +275,7 @@ class Login extends Component {
 
   _renderForgotPassword() {
 
-    if (this.props.emailPwdBtnStr='SignIn') {
+    if ( this.props.emailPwdBtnStr == 'SignIn') {
       let android_forgot_pwd = { marginTop: 10, marginBottom: 5 } ;
       return (
         <View style={{...styles.textRow, ...android_forgot_pwd}}>

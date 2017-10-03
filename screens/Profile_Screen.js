@@ -170,7 +170,7 @@ class ProfileScreen extends Component {
   }
 
   renderSpinner() {
-    console.log('Profile_Screen:line171: ' + this.state.loadingState);
+    // console.log('Profile_Screen:line171: ' + this.state.loadingState);
     if (this.state.loadingState) {
       return (
           <Spinner visible={true} color={'#FFFFFF'} size={'large'} />
@@ -227,6 +227,16 @@ class ProfileScreen extends Component {
     let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-around';
     let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
 
+    console.log('Profile_Screen:Line 230: Rendering Profile screen');
+
+    /*
+    console.log(this.props.email);
+    console.log(this.props.phone);
+    console.log(this.props.firstname);
+    console.log(this.props.lastname);
+    console.log(this.props.error);
+    console.log('Profile_Screen:Line 230: Rendering Profile screen');
+    */
 
 
     return (
@@ -338,8 +348,8 @@ let styles = RkStyleSheet.create(theme => ({
 }));
 
 const mapStateToProps = ({ auth }) => {
-  const { email, phone, firstname, lastname, error } = auth;
-  return { email, phone, firstname, lastname, error };
+  const { email, phone, firstname, lastname } = auth;
+  return { email, phone, firstname, lastname };
 };
 
 export default connect(mapStateToProps, {

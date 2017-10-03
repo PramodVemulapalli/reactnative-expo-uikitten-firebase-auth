@@ -12,6 +12,7 @@ class Login_Screen extends Component {
   };
 
   render() {
+    console.log('Login_Screen:Line 15: Rendering Login_Screen');
       return (
           <Login
             emailPwdBtnStr='SignIn'

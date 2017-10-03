@@ -87,7 +87,8 @@ class Reset_Screen extends Component {
     // this.setState({ loadingState: true });
     if (this.validateInput('emailReset', this.props.emailReset)) {
         this.props.resetUser({email: this.props.emailReset});
-        this.props.navigation.navigate('Welcome_screen');
+        console.log("Reset_Screen:Line 90: Email");
+        this.props.navigation.navigate('welcome_screen');
     }
     // this.setState({ loadingState: false });
     Keyboard.dismiss();
@@ -153,7 +154,7 @@ class Reset_Screen extends Component {
     let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-around';
     let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
 
-
+    console.log('Reset_Screen:Line 157: Rendering Reset_Screen');
 
     return (
       <View style={{...styles.screen, ...keyboardUp_styles_content}}>
@@ -178,7 +179,7 @@ class Reset_Screen extends Component {
           <GradientButton
             style={styles.save}
             rkType='large'
-            text='Reset to Email'
+            text='Send reset email'
             onPress={() => {
               this.onButtonPress();
             }}/>

@@ -27,6 +27,7 @@ class WalkthroughScreen extends Component {
   }
 
   render() {
+    console.log('WalkthroughScreen:Line 30: Rendering WalkthroughScreen');
     return (
       <View style={styles.screen}>
         <Walkthrough onChanged={(index) => this.changeIndex(index)}>

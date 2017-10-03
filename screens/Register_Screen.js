@@ -12,6 +12,7 @@ class Register_Screen extends Component {
   };
 
   render() {
+    console.log('Register_Screen:Line 15: Rendering Register_Screen');
       return (
           <Login
             emailPwdBtnStr='SignUp'
