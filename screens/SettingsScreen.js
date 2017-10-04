@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { Header } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import { logoutUser } from '../actions';
@@ -7,9 +8,10 @@ import { logoutUser } from '../actions';
 
 class SettingsScreen extends Component {
 
-  // Donot show header 
+  // Donot show header
   static navigationOptions = {
-    header: null
+    header: (headerOptions) => <Header {...headerOptions} />,
+    headerTitle: 'Settings Screen'
   };
 
   render() {

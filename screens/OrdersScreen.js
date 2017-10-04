@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { Header } from 'react-navigation';
+
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
 class OrdersScreen extends Component {
 
-  // Donot show header 
+  // Donot show header
   static navigationOptions = {
-    header: null
+    header: (headerOptions) => <Header {...headerOptions} />,
+    headerTitle: 'Orders Screen'
   };
 
   render() {

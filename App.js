@@ -24,6 +24,7 @@ import Login_Screen from './screens/Login_Screen';
 import LoadingScreen from './screens/LoadingScreen';
 import MenuScreen from './screens/MenuScreen';
 import OrdersScreen from './screens/OrdersScreen';
+import LocScreen from './screens/LocScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import Profile_Screen from './screens/Profile_Screen';
 import Reset_Screen from './screens/Reset_Screen';
@@ -74,11 +75,20 @@ export default class App extends React.Component {
       login_screen: { screen: Login_Screen},
       main_scr: {
           screen: TabNavigator({
-            menu_scr: { screen: MenuScreen },
+            menu_scr: {
+              screen: StackNavigator({
+                menu_screen: { screen: MenuScreen },
+                location_screen: { screen: LocScreen },
+              })
+            },
             orders_scr: { screen: OrdersScreen },
             settings_scr: { screen: SettingsScreen },
           },
           {
+            navigationOptions: {
+              header: null,
+              headerLeft: null
+            },
             tabBarOptions: {
               labelStyle: { fontSize: 12 }
             },

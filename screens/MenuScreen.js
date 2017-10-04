@@ -14,6 +14,7 @@ import {
 } from 'react-native-ui-kitten';
 import {SocialBar} from './../components/';
 import articles from './../data/raw/articles';
+import { Button } from 'react-native-elements';
 
 
 class MenuScreen extends Component {
@@ -67,11 +68,20 @@ class MenuScreen extends Component {
 
     return (
       <View>
-      <FlatList
-        data={articles}
-        renderItem={this.renderItem}
-        keyExtractor={this._keyExtractor}
-        style={styles.container}/>
+        <View>
+          <Button
+            large
+            title="Log out"
+            backgroundColor="#00aced"
+            icon={{ type: 'font-awesome', color: "#ffffff", name: 'sign-out' }}
+            onPress={ () => this.props.navigation.navigate('location_screen') }
+          />
+        </View>
+        <FlatList
+          data={articles}
+          renderItem={this.renderItem}
+          keyExtractor={this._keyExtractor}
+          style={styles.container}/>
         <Text>
           Hello World
         </Text>
