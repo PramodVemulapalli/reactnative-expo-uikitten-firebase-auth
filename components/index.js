@@ -1,10 +1,11 @@
 // export * from './avatar';
 export * from './gradientButton';
 export * from './paginationIndicator';
+export * from './socialBar';
 
 /*
 export * from './charts';
-export * from './socialBar';
+
 export * from './switch/index';
 export * from './ellipsis';
 export * from './gallery';
