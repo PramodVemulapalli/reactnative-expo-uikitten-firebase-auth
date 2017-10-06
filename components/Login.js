@@ -99,6 +99,7 @@ class Login extends Component {
 
   onButtonPress() {
 
+    console.log('Login.js:Line 102: onButtonPress');
     if ( this.validateInput('email', this.props.email) && this.validateInput('password', this.props.password)) {
       const { email, password, phone, firstname, lastname } = this.props;
       if (this.props.emailPwdBtnStr == 'SignIn') {
@@ -187,41 +188,32 @@ class Login extends Component {
       // In the case of login screen or if the email pwd button is pressed
       return (
 
-        <View style = {{...styles.emailPwdContainer}}>
+        <View style = {styles.emailPwdContainer}>
 
-          <RkTextInput
-            rkType='rounded'
-            placeholder='Email'
-            value={this.props.email}
-            onChangeText={email => this.onEmailChange(email)}
-            onBlur={() => { this.validateInput('email', this.props.email); }}
-          />
+            <RkTextInput
+              rkType='rounded'
+              placeholder='Email'
+              value={this.props.email}
+              onChangeText={email => this.onEmailChange(email)}
+              onBlur={() => { this.validateInput('email', this.props.email); }}
+            />
 
           <View>
             { this.renderFormError('email') }
           </View>
 
-
-          <RkTextInput
-            rkType='rounded'
-            placeholder='Password'
-            secureTextEntry={true}
-            value={this.props.password}
-            onChangeText={password => this.onPasswordChange(password)}
-            onBlur={() => { this.validateInput('password', this.props.password); }}
-          />
+            <RkTextInput
+              rkType='rounded'
+              placeholder='Password'
+              secureTextEntry={true}
+              value={this.props.password}
+              onChangeText={password => this.onPasswordChange(password)}
+              onBlur={() => { this.validateInput('password', this.props.password); }}
+            />
 
           <View>
             { this.renderFormError('password') }
           </View>
-
-
-          <GradientButton
-            onPress={() => { this.onButtonPress(); }}
-            rkType='large'
-            style={styles.save}
-            text={this.props.emailPwdBtnStr}>
-          </GradientButton>
 
 
         </View>
@@ -230,6 +222,18 @@ class Login extends Component {
       );
     }
   }
+
+  /*
+  <GradientButton
+    onPress={() => {
+      console.log("Hello");
+      this.onButtonPress();
+    }}
+    rkType='large'
+    style={styles.save}
+    text={this.props.emailPwdBtnStr}>
+  </GradientButton>
+  */
 
   _renderFacebook() {
     if (this.props.emailPwdBtnStr == 'SignIn') {
@@ -277,7 +281,7 @@ class Login extends Component {
   _renderForgotPassword() {
 
     if ( this.props.emailPwdBtnStr == 'SignIn') {
-      let android_forgot_pwd = { marginTop: 10, marginBottom: 5 } ;
+      let android_forgot_pwd = { marginBottom: 10} ;
       return (
         <View style={{...styles.textRow, ...android_forgot_pwd}}>
           <RkButton
@@ -344,10 +348,12 @@ class Login extends Component {
       // If we are on the login screen or
       // If we are on the register screen and the show email-pwd button is pressed
       // console.log('show parent props option');
+
+      let android_nav_elsewhere = { marginBottom: 20 } ;
       return (
         <View style={{...styles.footer, ...android_styles_footer}}>
           { this._renderForgotPassword() }
-          <View style={styles.textRow}>
+          <View style={{...styles.textRow, ...android_nav_elsewhere}}>
           <RkButton
               rkType='clear'
               onPress={ () => { this._footerButton() } }>
@@ -370,36 +376,67 @@ class Login extends Component {
     onStartShouldSetResponder={ (e) => true}
     onResponderRelease={ (e) => Keyboard.dismiss()}
     style={styles.screen}>
+
+    <GradientButton
+      onPress={() => { this.props.facebookSignin() }}
+      rkType='large'
+      style={styles.fb}
+      text={this.props.fbBtnStr}>
+    </GradientButton>
   */
+  //        <View style={styles.screen}>
+  //          <View>
+  //            {this._renderImage()}
+  //          </View>
+  // <View style = {{...styles.container, ...android_styles_container}}>
+  // {this._renderFacebook()}
+  // {this._renderEmailPwdOption()}
+  // {this._renderFooter()}
+  //<ErrorMessage />
+// </View>
+// </View>
 
   render() {
 
       let image = this._renderImage();
       let android_s_c_marginTop = (this.state.keyboardflag) ? 30 : 0; // Platform.OS === 'android' &&
       let android_styles_container = {marginTop: android_s_c_marginTop};
+      let screen_width = Dimensions.get('window').width;
 
       // console.log(android_styles_footer);
 
       return (
-
         <View style={styles.screen}>
-
-          {this._renderImage()}
-
-          <View style = {{...styles.container, ...android_styles_container}}>
+          <View>
+             {this._renderImage()}
+          </View>
+          <View style={{ marginHorizontal: 20 }}>
             {this._renderFacebook()}
+          </View>
+          <View style={{ marginHorizontal: 20 }}>
             {this._renderEmailPwdOption()}
-            {this._renderFooter()}
+          </View>
+          <View>
+            <GradientButton
+              onPress={() => {
+                console.log("Hello");
+                this.onButtonPress();
+              }}
+              rkType='large'
+              style={styles.save}
+              text={this.props.emailPwdBtnStr}>
+            </GradientButton>
           </View>
 
-
-          <ErrorMessage />
-
+          <View style={{  flex: 1 }}>
+            {this._renderFooter()}
+          </View>
         </View>
-      )
+      );
   }
 
 }
+
 
 
 // </RkAvoidKeyboard>
@@ -407,7 +444,6 @@ class Login extends Component {
 let styles = RkStyleSheet.create(theme => ({
   screen: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: theme.colors.screen.base
   },
   image: {
@@ -418,11 +454,11 @@ let styles = RkStyleSheet.create(theme => ({
     paddingHorizontal: 17,
     paddingBottom: scaleVertical(22),
     alignItems: 'center',
+    justifyContent: 'flex-start',
     flex: 1
   },
   emailPwdContainer: {
-    alignItems: 'center',
-    flex: 1
+    alignItems: 'center'
   },
   footer: {
     justifyContent: 'flex-end',
@@ -431,7 +467,7 @@ let styles = RkStyleSheet.create(theme => ({
   buttons: {
     flexDirection: 'row',
     marginBottom: scaleVertical(24),
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   button: {
     flex: 1,
@@ -443,8 +479,14 @@ let styles = RkStyleSheet.create(theme => ({
     marginVertical: 1,
     height: scale(56)
   },
+  fbtrial: {
+    marginLeft: 10,
+    marginVertical: 1,
+    height: scale(56)
+  },
   save: {
-    marginVertical: 9
+    marginVertical: 9,
+    marginHorizontal: 20
   },
   textRow: {
     justifyContent: 'center',

@@ -13,6 +13,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import { LOGIN_STATUS_CHANGED } from './actions/types';
 import { firebaseConfig } from './config/auth';
 import { bootstrap } from './config/bootstrap';
+// import KittenTheme from './config/theme';
 
 import WalkthroughScreen from './screens/WalkthroughScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -49,6 +50,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    // console.log(KittenTheme);
     Font.loadAsync({
       'fontawesome': require('./assets/fonts/fontawesome.ttf'),
       'icomoon': require('./assets/fonts/icomoon.ttf'),
@@ -90,7 +92,11 @@ export default class App extends React.Component {
               headerLeft: null
             },
             tabBarOptions: {
-              labelStyle: { fontSize: 12 }
+              // activeTintColor:
+              labelStyle: { fontSize: 12 },
+              style: {
+                backgroundColor: 'white',
+              }
             },
             swipeEnabled: false,
             tabBarPosition: 'bottom',
