@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import Login from './../components/Login';
+import Login from './../components/Login/Login';
 import { facebookSignin } from '../actions';
 
 
