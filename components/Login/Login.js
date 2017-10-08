@@ -25,7 +25,6 @@ class Login extends Component {
       keyboardflag: false,
       showEmailPwdState: false
     }
-
   }
 
   componentWillMount () {
@@ -84,7 +83,10 @@ class Login extends Component {
         <View style={styles.screen}>
 
           <View>
-            <LoginHeaderImage keyboardflag = {this.state.keyboardflag} />
+            <LoginHeaderImage
+              keyboardflag = {this.state.keyboardflag}
+              emailPwdBtnStr={this.props.emailPwdBtnStr}
+              />
           </View>
 
           <View style={{ marginHorizontal: 20 }}>

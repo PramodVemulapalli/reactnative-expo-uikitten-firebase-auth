@@ -71,11 +71,11 @@ class FooterNavButtons extends Component {
       // If we are on the register screen and the show email-pwd button is pressed
       // console.log('show parent props option');
 
-      let android_nav_elsewhere = { marginBottom: 20 } ;
+      // let android_nav_elsewhere = { marginBottom: 20 } ;
       return (
         <View style={{...styles.footer, ...android_styles_footer}}>
           <ForgotPwdButton emailPwdBtnStr={this.props.emailPwdBtnStr} onForgotPassword = {this.props.onForgotPassword} />
-          <View style={{...styles.textRow, ...android_nav_elsewhere}}>
+          <View style={ styles.textRow } >
             <RkButton
                 rkType='clear'
                 onPress={ () => { this._pressNavButton() } }>
@@ -135,6 +135,7 @@ let styles = RkStyleSheet.create(theme => ({
   textRow: {
     justifyContent: 'center',
     flexDirection: 'row',
+    marginBottom: 20
   }
 }));
 
