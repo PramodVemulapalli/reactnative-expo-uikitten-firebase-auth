@@ -48,8 +48,9 @@ class FooterNavButtons extends Component {
     if ( this.props.emailPwdBtnStr=='SignUp'  && !this.props.showEmailPwdState) {
         // In the case when we are on register screen and the show email-pwd button is not pressed
         // console.log('show email password option');
+        // {...styles.footer, ...
         return (
-        <View style={{...styles.footer, ...android_styles_footer}}>
+        <View style={android_styles_footer}>
           <View style={styles.textRow}>
           <RkButton
               rkType='clear'
@@ -72,8 +73,9 @@ class FooterNavButtons extends Component {
       // console.log('show parent props option');
 
       // let android_nav_elsewhere = { marginBottom: 20 } ;
+      //style={{...styles.footer, ...android_styles_footer}}
       return (
-        <View style={{...styles.footer, ...android_styles_footer}}>
+        <View>
           <ForgotPwdButton emailPwdBtnStr={this.props.emailPwdBtnStr} onForgotPassword = {this.props.onForgotPassword} />
           <View style={ styles.textRow } >
             <RkButton
@@ -116,15 +118,23 @@ class FooterNavButtons extends Component {
   render() {
 
     return (
-      <View style={{  flex: 1 }} >
+      <View>
         { this._renderFooter() }
       </View>
-    )
+    );
 
   }
 
 
 }
+
+/*
+
+<View style={ flex: 1 } >
+  { this._renderFooter() }
+</View>
+
+*/
 
 
 let styles = RkStyleSheet.create(theme => ({

@@ -54,8 +54,8 @@ class ProfileScreen extends Component {
   }
 
   componentWillUnmount () {
-   this.keyboardDidShowListener.remove();
-   this.keyboardDidHideListener.remove();
+     this.keyboardDidShowListener.remove();
+     this.keyboardDidHideListener.remove();
   }
 
   _keyboardDidShow () {
@@ -100,9 +100,10 @@ class ProfileScreen extends Component {
     let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
 
     console.log('Profile_Screen:Line 230: Rendering Profile screen');
-
+    // style={{...styles.screen, ...keyboardUp_styles_content}}
     return (
-      <View style={{...styles.screen, ...keyboardUp_styles_content}}>
+      <View style={styles.screen}>
+
         <LoginHeaderImage
           keyboardflag = {this.state.keyboardflag}
           emailPwdBtnStr = {'Profile'}
@@ -114,7 +115,6 @@ class ProfileScreen extends Component {
         <ProfileDataButton
           onRegisterPressAndReady = {this.onRegisterPressAndReady.bind(this)}
         />
-
         <FooterNavButtons
           emailPwdBtnStr={'Profile Screen'}
           onForgotPassword={''}
@@ -125,7 +125,6 @@ class ProfileScreen extends Component {
           showEmailPwdState={true}
         />
 
-
         {this.renderSpinner()}
 
         <ErrorMessage />
@@ -135,12 +134,13 @@ class ProfileScreen extends Component {
     );
   }
 }
-
+//    flex: 1,
+//    justifyContent: 'space-around',
 let styles = RkStyleSheet.create(theme => ({
   screen: {
+    backgroundColor: theme.colors.screen.base,
     flex: 1,
-    justifyContent: 'space-around',
-    backgroundColor: theme.colors.screen.base
+    justifyContent: 'space-around'
   },
   image: {
     marginVertical: 10,
