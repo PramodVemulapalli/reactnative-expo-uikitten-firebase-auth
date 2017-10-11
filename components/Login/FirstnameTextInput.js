@@ -77,7 +77,8 @@ class FirstnameTextInput extends Component {
 let styles = RkStyleSheet.create(theme => ({
   emailPwdContainer: {
     alignItems: 'center',
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    marginTop: 20
   }
 }));
 

@@ -14,6 +14,11 @@ import { connect } from 'react-redux';
 import validator from 'validator';
 import { emailResetChanged, errorSet, resetUser } from '../actions';
 import Spinner from 'react-native-loading-spinner-overlay';
+import EmailResetTextInput from './../components/Login/EmailResetTextInput';
+import LoginHeaderImage from './../components/Login/LoginHeaderImage';
+import EmailPwdButton from './../components/Login/EmailPwdButton';
+import FooterNavButtons from './../components/Login/FooterNavButtons';
+
 
 import ErrorMessage from './../components/ErrorMessage';
 import { FormLabel, FormInput, FormValidationMessage, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
@@ -41,10 +46,6 @@ class Reset_Screen extends Component {
       emailFlag: 0,
       keyboardflag: false,
       loadingState: false,
-    }
-
-    if (Platform.OS === 'android') {
-      // UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
   }
@@ -77,10 +78,12 @@ class Reset_Screen extends Component {
      header: null
   }
 
-  // Call action if the value is changed
-
-  onemailResetChange(text) {
-    this.props.emailResetChanged(text);
+  onReset() {
+    // this.setState({ loadingState: true });
+    console.log("Reset_Screen:Line 90: Email");
+    this.props.navigation.navigate('welcome_screen');
+    // this.setState({ loadingState: false });
+    Keyboard.dismiss();
   }
 
   onButtonPress() {
@@ -121,80 +124,50 @@ class Reset_Screen extends Component {
     }
   }
 
-  // Display form validation errors if needed
-
-  renderFormError(inputName) {
-    if (inputName == 'email') {
-      if (this.state.emailError !='') {
-        return (<RkText rkType='danger'> {this.state.emailError} </RkText>);
-      }
-    }
-    return;
-  }
-
-  onNavPress = (screenname) => {
-    this.props.navigation.navigate(screenname);
-  }
-
   render() {
 
-
-    let keyboardUp_image = (this.state.keyboardflag) ? -1 : 1;
-    let keyboardUp_image_content = { flex: keyboardUp_image };
-
-    let renderIcon = () => {
-        return (
-          <View style={{ ...styles.imageStyle, ...keyboardUp_image_content }}>
-            <Image style={styles.image} source={require('./../assets/images/cartLogo.png')}/>
-            <RkText rkType='h1'>Registration</RkText>
-          </View>
-          );
-    };
-
-    let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-around';
+    let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-between';
     let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
 
     console.log('Reset_Screen:Line 157: Rendering Reset_Screen');
+    console.log(keyboardUp_styles_content);
 
     return (
+
       <View style={{...styles.screen, ...keyboardUp_styles_content}}>
-        { renderIcon() }
-        <View style={styles.content}>
-          <View>
-            <RkTextInput
-              rkType='rounded'
-              placeholder='Email ( John.Doe@gmail.com )'
-              value={this.props.emailReset}
-              onChangeText={emailReset => this.onemailResetChange(emailReset)}
-              onBlur={() => { this.validateInput('email', this.props.emailReset); }}
-            />
-            <View>
-              { this.renderFormError('emailReset') }
-            </View>
 
-          </View>
-        </View>
+      <View>
+        <LoginHeaderImage
+          keyboardflag = {this.state.keyboardflag}
+          emailPwdBtnStr = {'Profile'}
+          headerString = {'Password Reset'}
+        />
+      </View>
 
-        <View style={{ ...styles.buttonStyle, ...keyboardUp_image_content }}>
-          <GradientButton
-            style={styles.save}
-            rkType='large'
-            text='Send reset email'
-            onPress={() => {
-              this.onButtonPress();
-            }}/>
-          <View style={styles.footer}>
-            <View style={styles.textRow}>
-              <RkButton rkType='clear'  onPress={() => this.props.navigation.navigate('login_screen')}>
-                <RkText rkType='primary3'>Already have an account?</RkText>
-                <RkText rkType='header6'> Sign In now </RkText>
-              </RkButton>
-            </View>
-          </View>
-        </View>
+      <View>
+        <EmailResetTextInput />
+      </View>
+
+        <View style={{ ...styles.buttonStyle, ...keyboardUp_styles_content }}>
+          <EmailPwdButton
+            emailPwdBtnStr={'Reset'}
+            onButtonPress={this.onReset.bind(this)}
+          />
+          <FooterNavButtons
+            emailPwdBtnStr={'Profile Screen'}
+            onForgotPassword={''}
+            onNavString1={'Already have an account?'}
+            onNavString2={'Sign In now'}
+            onNavPress={() => this.props.navigation.navigate('login_screen')}
+            keyboardflag={this.state.keyboardflag}
+            showEmailPwdState={true}
+          />
 
 
         <ErrorMessage />
+
+        </View>
+
 
 
       </View>
@@ -203,16 +176,21 @@ class Reset_Screen extends Component {
   }
 }
 
+/*
+<GradientButton
+  style={styles.save}
+  rkType='large'
+  text='Send reset email'
+  onPress={() => {
+    this.onButtonPress();
+  }}/>
+*/
+
 let styles = RkStyleSheet.create(theme => ({
   screen: {
-    padding: 16,
     flex: 1,
     justifyContent: 'space-around',
     backgroundColor: theme.colors.screen.base
-  },
-  imageStyle: {
-    alignItems: 'center',
-    marginTop: 20
   },
   buttonStyle: {
     justifyContent: 'flex-end'
@@ -252,3 +230,37 @@ const mapStateToProps = ({ auth }) => {
 export default connect(mapStateToProps, {
   emailResetChanged, resetUser, errorSet
 })(Reset_Screen);
+
+/*
+
+<View style={styles.content}>
+  <View>
+    <RkTextInput
+      rkType='rounded'
+      placeholder='Email ( John.Doe@gmail.com )'
+      value={this.props.emailReset}
+      onChangeText={emailReset => this.onemailResetChange(emailReset)}
+      onBlur={() => { this.validateInput('email', this.props.emailReset); }}
+    />
+    <View>
+      { this.renderFormError('emailReset') }
+    </View>
+
+  </View>
+</View>
+
+{ renderIcon() }
+
+let keyboardUp_image = (this.state.keyboardflag) ? -1 : 1;
+let keyboardUp_image_content = { flex: keyboardUp_image };
+
+let renderIcon = () => {
+    return (
+      <View style={{ ...styles.imageStyle, ...keyboardUp_image_content }}>
+        <Image style={styles.image} source={require('./../assets/images/cartLogo.png')}/>
+        <RkText rkType='h1'>Registration</RkText>
+      </View>
+      );
+};
+
+*/

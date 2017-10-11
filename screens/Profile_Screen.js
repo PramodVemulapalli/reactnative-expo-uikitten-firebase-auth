@@ -96,17 +96,18 @@ class ProfileScreen extends Component {
 
   render() {
 
-    let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-around';
+    let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-between';
     let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
 
     console.log('Profile_Screen:Line 230: Rendering Profile screen');
     // style={{...styles.screen, ...keyboardUp_styles_content}}
     return (
-      <View style={styles.screen}>
+      <View style={{ ...styles.screen, ...keyboardUp_styles_content}}>
 
         <LoginHeaderImage
           keyboardflag = {this.state.keyboardflag}
           emailPwdBtnStr = {'Profile'}
+          headerString = {'Registration'}
         />
         <FirstnameTextInput />
         <LastnameTextInput />
@@ -115,19 +116,19 @@ class ProfileScreen extends Component {
         <ProfileDataButton
           onRegisterPressAndReady = {this.onRegisterPressAndReady.bind(this)}
         />
-        <FooterNavButtons
-          emailPwdBtnStr={'Profile Screen'}
-          onForgotPassword={''}
-          onNavString1={'Already have an account?'}
-          onNavString2={'Sign In now'}
-          onNavPress={() => this.props.navigation.navigate('login_screen')}
-          keyboardflag={this.state.keyboardflag}
-          showEmailPwdState={true}
-        />
-
-        {this.renderSpinner()}
-
-        <ErrorMessage />
+        <View>
+          <FooterNavButtons
+            emailPwdBtnStr={'Profile Screen'}
+            onForgotPassword={''}
+            onNavString1={'Already have an account?'}
+            onNavString2={'Sign In now'}
+            onNavPress={() => this.props.navigation.navigate('login_screen')}
+            keyboardflag={this.state.keyboardflag}
+            showEmailPwdState={true}
+          />
+          {this.renderSpinner()}
+          <ErrorMessage />
+        </View>
 
       </View>
 
@@ -140,7 +141,7 @@ let styles = RkStyleSheet.create(theme => ({
   screen: {
     backgroundColor: theme.colors.screen.base,
     flex: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'space-between',
   },
   image: {
     marginVertical: 10,

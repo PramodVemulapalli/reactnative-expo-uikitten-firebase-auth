@@ -78,6 +78,7 @@ class Login extends Component {
       let android_s_c_marginTop = (this.state.keyboardflag) ? 30 : 0; // Platform.OS === 'android' &&
       let android_styles_container = {marginTop: android_s_c_marginTop};
       let screen_width = Dimensions.get('window').width;
+      let FbButtonSize = { marginHorizontal: 20 };
 
       return (
         <View style={styles.screen}>
@@ -89,7 +90,7 @@ class Login extends Component {
               />
           </View>
 
-          <View style={{ marginHorizontal: 20 }}>
+          <View style={{ ...FbButtonSize, ...android_styles_container }}>
             <FbSignInUpButton emailPwdBtnStr={this.props.emailPwdBtnStr} fbBtnStr={this.props.fbBtnStr} />
           </View>
 

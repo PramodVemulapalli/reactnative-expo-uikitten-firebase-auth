@@ -23,7 +23,7 @@ class LoginHeaderImage extends Component {
           return (
           <View style={{alignItems: 'center'}}>
             <Image style={styles.profileImage} source={require('./../../assets/images/cartLogo.png')}/>
-            <RkText rkType='h1'>Registration</RkText>
+            <RkText rkType='h1'>{this.props.headerString}</RkText>
           </View>
           );
         }
@@ -47,7 +47,7 @@ let styles = RkStyleSheet.create(theme => ({
     marginBottom: scaleVertical(10),
   },
   profileImage: {
-    marginVertical: 10,
+    marginVertical: 20,
     height:scaleVertical(77),
     resizeMode:'contain'
   }

@@ -9,24 +9,39 @@ import {
 
 import {GradientButton} from './../../components/';
 import validator from 'validator';
-import { loginUser, signupUser, errorSet } from './../../actions';
+import { loginUser, signupUser, errorSet, resetUser } from './../../actions';
 
 
 class EmailPwdButton extends Component {
 
   onButtonPress() {
 
-    console.log('Login.js:Line 102: onButtonPress');
-    if ( this.validateInput('email', this.props.email) && this.validateInput('password', this.props.password)) {
-      const { email, password, phone, firstname, lastname } = this.props;
-      if (this.props.emailPwdBtnStr == 'SignIn') {
-        this.props.loginUser({ email, password });
-      }
-      if (this.props.emailPwdBtnStr == 'SignUp') {
-        this.props.signupUser({ email, password, phone, firstname, lastname });
-      }
-    } else {
-      this.props.errorSet('Please provide a valid inputs');
+    if (this.props.emailPwdBtnStr == 'SignIn') {
+        const { email, password } = this.props;
+        if ( this.validateInput('email', email) && this.validateInput('password', password)) {
+          this.props.loginUser({ email, password });
+        } else {
+          this.props.errorSet('Please provide a valid inputs');
+        }
+    }
+
+    if (this.props.emailPwdBtnStr == 'SignUp') {
+        const { email, password, phone, firstname, lastname } = this.props;
+        if ( this.validateInput('email', email) && this.validateInput('password', password)) {
+          this.props.signupUser({ email, password, phone, firstname, lastname });
+        } else {
+          this.props.errorSet('Please provide a valid inputs');
+        }
+    }
+
+    if (this.props.emailPwdBtnStr == 'Reset') {
+        const { emailReset } = this.props;
+        if ( this.validateInput('email', emailReset) ) {
+          this.props.resetUser({email: emailReset});
+          this.props.onButtonPress();
+        } else {
+          this.props.errorSet('Please provide a valid input');
+        }
     }
 
   }
@@ -71,10 +86,10 @@ let styles = RkStyleSheet.create(theme => ({
 
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password,  phone, firstname, lastname } = auth;
-  return { email, password, phone, firstname, lastname };
+  const { email, password,  phone, firstname, lastname, emailReset } = auth;
+  return { email, password, phone, firstname, lastname, emailReset };
 };
 
 export default connect(mapStateToProps, {
-  loginUser, signupUser, errorSet
+  loginUser, signupUser, errorSet, resetUser
 })(EmailPwdButton);
