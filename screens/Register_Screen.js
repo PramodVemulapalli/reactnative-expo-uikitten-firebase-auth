@@ -5,22 +5,22 @@ import Login from './../components/Login/Login';
 import { facebookSignin } from '../actions';
 
 
-class Register_Screen extends Component {
+class fbRegister_Screen extends Component {
 
   static navigationOptions = {
     header: null,
   };
 
   render() {
-    console.log('Register_Screen:Line 30: Rendering WalkthroughScreen');
       return (
           <Login
             emailPwdBtnStr='SignUp'
             fbBtnStr='Facebook SignUp'
-            showEmailPwdOption={true}
+            showEmailPwdOption={false} // the email password option will be hidden
             onNavString1='Already have an account?'
-            onNavString2=' Sign In now'
-            onNavPress={ () => { this.props.navigation.navigate('login_screen'); } }
+            onNavString2='Sign In now'
+            onNavPress={ () => { this.props.navigation.navigate('register_screen'); } }
+            onForgotPassword={ () => { this.props.navigation.navigate('reset_screen'); } }
           />
       )
   }
@@ -28,4 +28,4 @@ class Register_Screen extends Component {
 
 export default connect(null, {
   facebookSignin
-})(Register_Screen);
+})(fbRegister_Screen);

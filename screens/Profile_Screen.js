@@ -80,7 +80,7 @@ class ProfileScreen extends Component {
 
   onRegisterPressAndReady() {
     this.setState({ loadingState: true });
-    this.props.navigation.navigate('fbregister_screen')
+    this.props.navigation.navigate('register_screen')
     this.setState({ loadingState: false });
     Keyboard.dismiss();
   }

@@ -16,17 +16,12 @@ import { bootstrap } from './config/bootstrap';
 // import KittenTheme from './config/theme';
 
 import WalkthroughScreen from './screens/WalkthroughScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
-import RegisterScreen from './screens/RegisterScreen';
 import Register_Screen from './screens/Register_Screen';
-import fbRegister_Screen from './screens/fbRegister_Screen';
-import LoginScreen from './screens/LoginScreen';
 import Login_Screen from './screens/Login_Screen';
 import LoadingScreen from './screens/LoadingScreen';
 import MenuScreen from './screens/MenuScreen';
-import OrdersScreen from './screens/OrdersScreen';
+import Orders_Screen from './screens/Orders_Screen';
 import LocScreen from './screens/LocScreen';
-import ProfileScreen from './screens/ProfileScreen';
 import Profile_Screen from './screens/Profile_Screen';
 import Reset_Screen from './screens/Reset_Screen';
 import SettingsScreen from './screens/SettingsScreen';
@@ -66,14 +61,9 @@ export default class App extends React.Component {
     const MainNavigator = StackNavigator({
       loading_scr: { screen: LoadingScreen },
       welcome_screen: { screen: WalkthroughScreen },
-      welcome_scr: { screen: WelcomeScreen },
-      register_scr: { screen: RegisterScreen },
       register_screen: { screen: Register_Screen },
       reset_screen: { screen: Reset_Screen },
-      fbregister_screen: { screen: fbRegister_Screen },
-      profile_scr: { screen: ProfileScreen },
       profile_screen: { screen: Profile_Screen },
-      login_scr: { screen: LoginScreen },
       login_screen: { screen: Login_Screen},
       main_scr: {
           screen: TabNavigator({
@@ -83,7 +73,7 @@ export default class App extends React.Component {
                 location_screen: { screen: LocScreen },
               })
             },
-            orders_scr: { screen: OrdersScreen },
+            orders_screen: { screen: Orders_Screen },
             settings_scr: { screen: SettingsScreen },
           },
           {

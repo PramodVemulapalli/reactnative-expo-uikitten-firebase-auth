@@ -5,7 +5,7 @@ import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
-class OrdersScreen extends Component {
+class Orders_Screen extends Component {
 
   // Donot show header
   static navigationOptions = {
@@ -36,4 +36,4 @@ const styles = {
   }
 }
 
-export default OrdersScreen;
+export default Orders_Screen;

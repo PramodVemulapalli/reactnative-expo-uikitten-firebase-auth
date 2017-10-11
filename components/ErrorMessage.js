@@ -33,7 +33,7 @@ class ErrorMessage extends Component {
           animationIn={'slideInLeft'}
           animationOut={'slideOutRight'}
           style={styles.bottomModal}
-          backdropOpacity={Platform.OS === 'android'? 0.5 : 0.7}
+          backdropOpacity={Platform.OS === 'android'? 0.4 : 0.7}
         >
           {this.renderModalContent()}
         </Modal>
