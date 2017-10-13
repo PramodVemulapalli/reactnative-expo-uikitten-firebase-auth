@@ -17,7 +17,7 @@ import articles from './../data/raw/articles';
 import { Button } from 'react-native-elements';
 
 
-class MenuScreen extends Component {
+class Menu_Screen extends Component {
 
   static navigationOptions = {
     title: 'Article List'.toUpperCase()
@@ -106,4 +106,4 @@ let styles = RkStyleSheet.create(theme => ({
   }
 }));
 
-export default MenuScreen;
+export default Menu_Screen;

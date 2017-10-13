@@ -11,7 +11,7 @@ import {Walkthrough3} from './walkthroughs/walkthrough3';
 import {PaginationIndicator} from './../components';
 
 
-class WalkthroughScreen extends Component {
+class Welcome_Screen extends Component {
 
   static navigationOptions = {
     header: null,
@@ -62,4 +62,4 @@ let styles = RkStyleSheet.create(theme => ({
   }
 }));
 
-export default WalkthroughScreen;
+export default Welcome_Screen;

@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
-class LocScreen extends Component {
+class Location_Screen extends Component {
 
   // Donot show header
   static navigationOptions = {
@@ -33,4 +33,4 @@ const styles = {
   }
 }
 
-export default LocScreen;
+export default Location_Screen;

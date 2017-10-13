@@ -10,21 +10,20 @@ import { Font } from 'expo';
 
 import { StyleSheet, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { LOGIN_STATUS_CHANGED } from './actions/types';
 import { firebaseConfig } from './config/auth';
 import { bootstrap } from './config/bootstrap';
 // import KittenTheme from './config/theme';
 
-import WalkthroughScreen from './screens/WalkthroughScreen';
+import Welcome_Screen from './screens/Welcome_Screen';
 import Register_Screen from './screens/Register_Screen';
 import Login_Screen from './screens/Login_Screen';
-import LoadingScreen from './screens/LoadingScreen';
-import MenuScreen from './screens/MenuScreen';
+import Loading_Screen from './screens/Loading_Screen';
+import Menu_Screen from './screens/Menu_Screen';
 import Orders_Screen from './screens/Orders_Screen';
-import LocScreen from './screens/LocScreen';
+import Location_Screen from './screens/Location_Screen';
 import Profile_Screen from './screens/Profile_Screen';
 import Reset_Screen from './screens/Reset_Screen';
-import SettingsScreen from './screens/SettingsScreen';
+import Settings_Screen from './screens/Settings_Screen';
 
 
 export default class App extends React.Component {
@@ -44,9 +43,9 @@ export default class App extends React.Component {
 
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // console.log(KittenTheme);
-    Font.loadAsync({
+    await Font.loadAsync({
       'fontawesome': require('./assets/fonts/fontawesome.ttf'),
       'icomoon': require('./assets/fonts/icomoon.ttf'),
       'Righteous-Regular': require('./assets/fonts/Righteous-Regular.ttf'),
@@ -59,22 +58,22 @@ export default class App extends React.Component {
 
   render() {
     const MainNavigator = StackNavigator({
-      loading_scr: { screen: LoadingScreen },
-      welcome_screen: { screen: WalkthroughScreen },
+      loading_scr: { screen: Loading_Screen },
+      welcome_screen: { screen: Welcome_Screen },
       register_screen: { screen: Register_Screen },
       reset_screen: { screen: Reset_Screen },
       profile_screen: { screen: Profile_Screen },
       login_screen: { screen: Login_Screen},
-      main_scr: {
+      main_screen: {
           screen: TabNavigator({
             menu_scr: {
               screen: StackNavigator({
-                menu_screen: { screen: MenuScreen },
-                location_screen: { screen: LocScreen },
+                menu_screen: { screen: Menu_Screen },
+                location_screen: { screen: Location_Screen },
               })
             },
             orders_screen: { screen: Orders_Screen },
-            settings_scr: { screen: SettingsScreen },
+            settings_screen: { screen: Settings_Screen },
           },
           {
             navigationOptions: {
