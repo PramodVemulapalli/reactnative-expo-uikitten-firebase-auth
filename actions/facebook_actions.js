@@ -17,21 +17,25 @@ export const facebookSignin = () => {
     return async (dispatch) => {
       console.log('facebook_Actions.js:line17:fbappid');
       console.log(fbappid);
+
+      dispatch({
+        type: LOGIN_STATUS_CHANGED,
+        payload: 'fbchecking'
+      });
+
+
       let { type, token } = await Facebook.logInWithReadPermissionsAsync(fbappid, {
         permissions: ['public_profile', 'email']
       });
 
-      dispatch({
-        type: LOGIN_STATUS_CHANGED,
-        payload: 'checking'
-      });
+
 
       console.log('---credential---');
       console.log(credential);
       if (type === 'cancel') {
         dispatch({
           type: LOGIN_STATUS_CHANGED,
-          payload: 'loginfailed'
+          payload: 'fbloginfailed'
         });
         return (dispatch({ type: FACEBOOK_LOGIN_FAIL }));
       }
@@ -87,20 +91,23 @@ export const facebookSignup = ({ email, phone, firstname, lastname  }) => {
 
     return async (dispatch) => {
       console.log(fbappid);
+
+      dispatch({
+        type: LOGIN_STATUS_CHANGED,
+        payload: 'fbchecking'
+      });
+
       let { type, token } = await Facebook.logInWithReadPermissionsAsync(fbappid, {
         permissions: ['public_profile', 'email']
       });
 
-      dispatch({
-        type: LOGIN_STATUS_CHANGED,
-        payload: 'checking'
-      });
+
 
       console.log(credential);
       if (type === 'cancel') {
         dispatch({
           type: LOGIN_STATUS_CHANGED,
-          payload: 'loginfailed'
+          payload: 'fbloginfailed'
         });
         return (dispatch({ type: FACEBOOK_LOGIN_FAIL }));
       }
@@ -146,5 +153,7 @@ export const facebookSignup = ({ email, phone, firstname, lastname  }) => {
       // await AsyncStorage.setItem('fb_token', token);
       dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
   };
+
+
 
 };

@@ -78,20 +78,28 @@ class Login extends Component {
 
   render() {
 
-      let android_s_c_marginTop = (this.state.keyboardflag) ? 30 : 0; // Platform.OS === 'android' &&
-      let android_styles_container = {marginTop: android_s_c_marginTop};
+      android_s_c_marginTop = (this.state.keyboardflag) ? 30 : 0; // Platform.OS === 'android' &&
       let screen_width = Dimensions.get('window').width;
       let FbButtonSize = { marginHorizontal: 20 };
-      let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-between';
-      if ( this.props.emailPwdBtnStr=='SignUp' && !this.state.showEmailPwdState) {
+      if ( this.props.loginStatus != 'fbchecking' ) {
+          keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-between';
+        if ( this.props.emailPwdBtnStr=='SignUp' && !this.state.showEmailPwdState ) {
           keyboardUp_justifyContent = 'flex-start';
+        }
       }
-      let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
-      console.log('I am in here ----------------------------------------');
-      console.log(keyboardUp_styles_content);
-      console.log(this.props.emailPwdBtnStr);
-      console.log(this.props.showEmailPwdState);
+      else {
+        console.log(this.props.loginStatus);
+        // if fbchecking act like the keyboard is down even if it is up
+        android_s_c_marginTop = 0;
+        keyboardUp_justifyContent = 'space-between';
+      }
 
+      let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
+      android_styles_container = {marginTop: android_s_c_marginTop};
+
+      console.log('This is Login.js +++++++++++++++++++++++');
+      console.log(this.props.emailPwdBtnStr);
+      console.log(android_styles_container);
 
       return (
         <View style={{ ...styles.screen, ...keyboardUp_styles_content}}>
@@ -127,6 +135,10 @@ class Login extends Component {
 }
 
 //
+const mapStateToProps = ({ auth }) => {
+  const { loginStatus, } = auth;
+  return { loginStatus, };
+};
 
 let styles = RkStyleSheet.create(theme => ({
   screen: {
@@ -135,4 +147,4 @@ let styles = RkStyleSheet.create(theme => ({
   }
 }));
 
-export default Login;
+export default connect(mapStateToProps,null)(Login);

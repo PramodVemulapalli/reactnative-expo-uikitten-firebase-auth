@@ -75,7 +75,7 @@ class Loading_Screen extends Component {
     console.log('------------------------------------------------');
     console.log("Loading Screen: Render: Login Status");
     console.log(this.props.loginStatus);
-    console.log(this.props.FontLoaded);
+    console.log(this.props.fontLoaded);
     //<Spinner visible={true} textContent={"Loading..."} textStyle={{color: '#003399'}} overlayColor={'rgba(0,51,153,0.5)'} />
 
 
@@ -84,14 +84,14 @@ class Loading_Screen extends Component {
               <AppLoading />
           );
         }
-      if ( this.props.loginStatus == 'checking' ) {
+      if ( this.props.loginStatus == 'checking' || this.props.loginStatus == 'fbchecking' ) {
           return (
             <View>
               <Spinner visible={true} color={'#003399'} size={'large'} />
             </View>
           );
         }
-      if ( this.props.loginStatus == 'loggedin' || this.props.loginStatus == 'notloggedin' || this.props.loginStatus == 'loginfailed') {
+      if ( this.props.loginStatus == 'loggedin' || this.props.loginStatus == 'notloggedin' || this.props.loginStatus == 'loginfailed' || this.props.loginStatus == 'fbloginfailed') {
         return (
           <View/>
         );

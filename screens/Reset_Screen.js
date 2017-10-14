@@ -139,7 +139,7 @@ class Reset_Screen extends Component {
       <View>
         <LoginHeaderImage
           keyboardflag = {this.state.keyboardflag}
-          emailPwdBtnStr = {'Profile'}
+          emailPwdBtnStr = {'Reset'}
           headerString = {'Password Reset'}
         />
       </View>

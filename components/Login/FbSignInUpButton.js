@@ -26,6 +26,7 @@ class FbSignInUpButton extends Component {
   }
 
   render() {
+
     return (
       <View style={styles.buttons}>
         <RkButton style={styles.button} rkType='social'>
@@ -48,8 +49,8 @@ class FbSignInUpButton extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-  const { email, phone, firstname, lastname } = auth;
-  return { email, phone, firstname, lastname };
+  const { email, phone, firstname, lastname, loginStatus, } = auth;
+  return { email, phone, firstname, lastname, loginStatus, };
 };
 
 
