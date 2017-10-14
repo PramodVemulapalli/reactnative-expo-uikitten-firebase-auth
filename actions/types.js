@@ -13,6 +13,7 @@ export const SIGNUP_USER = 'signup_user';
 export const ERROR_SET = 'error_set';
 export const LOAD_WELCOME_CHANGED = 'load_welcome_changed';
 export const EMAIL_RESET_CHANGED = 'email_reset_changed';
+export const FONT_LOADED_CHANGED = 'font_loaded_changed';
 
 export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 export const FACEBOOK_LOGIN_FAIL = 'facebook_login_fail';

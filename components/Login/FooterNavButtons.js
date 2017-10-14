@@ -41,7 +41,7 @@ class FooterNavButtons extends Component {
 
     let android_s_c_justifyContent = (this.props.keyboardflag) ? 'flex-start' : 'flex-end'; // Platform.OS === 'android' &&
     if ( this.props.emailPwdBtnStr=='SignUp' && !this.props.showEmailPwdState) {
-        android_s_c_justifyContent = 'flex-start';
+        android_s_c_justifyContent = 'flex-end';
     }
     let android_styles_footer = {justifyContent: android_s_c_justifyContent};
 
@@ -75,7 +75,7 @@ class FooterNavButtons extends Component {
       // let android_nav_elsewhere = { marginBottom: 20 } ;
       //style={{...styles.footer, ...android_styles_footer}}
       return (
-        <View>
+        <View style={{ justifyContent: 'flex-start'}}>
           <ForgotPwdButton emailPwdBtnStr={this.props.emailPwdBtnStr} onForgotPassword = {this.props.onForgotPassword} />
           <View style={ styles.textRow } >
             <RkButton

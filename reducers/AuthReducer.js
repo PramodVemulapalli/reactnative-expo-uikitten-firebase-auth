@@ -11,6 +11,7 @@ import {
   LOGIN_STATUS_CHANGED,
   LOAD_WELCOME_CHANGED,
   EMAIL_RESET_CHANGED,
+  FONT_LOADED_CHANGED,
   SIGNUP_USER,
   ERROR_SET
 } from '../actions/types';
@@ -24,6 +25,7 @@ const INITIAL_STATE = {
   lastname: '',
   user: null,
   error: '',
+  fontLoaded: false,
   loginStatus: 'initial',
   loadWelcome: false
 };
@@ -42,6 +44,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, firstname: action.payload };
     case LASTNAME_CHANGED:
       return { ...state, lastname: action.payload };
+    case FONT_LOADED_CHANGED:
+      return { ...state, fontLoaded: action.payload };
     case ERROR_SET:
       return { ...state, error: action.payload };
     case LOGIN_USER:

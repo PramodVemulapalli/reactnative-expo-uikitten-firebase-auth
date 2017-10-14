@@ -79,9 +79,16 @@ class Login extends Component {
       let android_styles_container = {marginTop: android_s_c_marginTop};
       let screen_width = Dimensions.get('window').width;
       let FbButtonSize = { marginHorizontal: 20 };
+      let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-between';
+      if ( this.props.emailPwdBtnStr=='SignUp' && !this.props.showEmailPwdState) {
+          keyboardUp_justifyContent = 'flex-start';
+      }
+      let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
+
+
 
       return (
-        <View style={styles.screen}>
+        <View style={{ ...styles.screen, ...keyboardUp_styles_content}}>
 
           <View>
             <LoginHeaderImage
@@ -112,6 +119,8 @@ class Login extends Component {
   }
 
 }
+
+//
 
 let styles = RkStyleSheet.create(theme => ({
   screen: {

@@ -12,6 +12,7 @@ import {
   LOGIN_STATUS_CHANGED,
   LOAD_WELCOME_CHANGED,
   EMAIL_RESET_CHANGED,
+  FONT_LOADED_CHANGED,
   SIGNUP_USER,
   ERROR_SET,
   RESET_USER
@@ -27,6 +28,13 @@ export const errorSet = (text) => {
 export const emailChanged = (text) => {
   return {
     type: EMAIL_CHANGED,
+    payload: text
+  };
+};
+
+export const fontLoadedChanged = (text) => {
+  return {
+    type: FONT_LOADED_CHANGED,
     payload: text
   };
 };

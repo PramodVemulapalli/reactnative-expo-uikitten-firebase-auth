@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { loginStatusChanged, authStateChanged } from '../actions';
+import { loginStatusChanged, authStateChanged, fontLoadedChanged } from '../actions';
 import firebase from 'firebase';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { AppLoading } from 'expo';
+import { AppLoading, Font } from 'expo';
 
 
 class Loading_Screen extends Component {
@@ -13,9 +13,36 @@ class Loading_Screen extends Component {
     header: null
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.authStateChanged();
+    if ( !this.props.fontLoaded ) {
+      console.log('I am in here ----------------------------------------');
+      console.log(this.props.fontLoaded);
+      await Font.loadAsync({
+        'fontawesome': require('./../assets/fonts/fontawesome.ttf'),
+        'icomoon': require('./../assets/fonts/icomoon.ttf'),
+        'Righteous-Regular': require('./../assets/fonts/Righteous-Regular.ttf'),
+        'Roboto-Bold': require('./../assets/fonts/Roboto-Bold.ttf'),
+        'Roboto-Light': require('./../assets/fonts/Roboto-Light.ttf'),
+        'Roboto-Medium': require('./../assets/fonts/Roboto-Medium.ttf'),
+        'Roboto-Regular': require('./../assets/fonts/Roboto-Regular.ttf'),
+      });
+      this.props.fontLoadedChanged(true);
+    }
   }
+
+  /*
+  componentDidMount() {
+    // console.log(KittenTheme);
+    if ( !this.props.FontLoaded ) {
+      console.log('I am in here');
+      this.props.fontLoadedChanged(true);
+    }
+  }
+
+  */
+
+
 
   componentWillReceiveProps(nextProps) {
     console.log('-------------------------------------');
@@ -46,16 +73,14 @@ class Loading_Screen extends Component {
 
   render() {
 
-    console.log('-------------------------------------');
+    console.log('------------------------------------------------');
     console.log("Loading Screen: Render: Login Status");
     console.log(this.props.loginStatus);
+    console.log(this.props.FontLoaded);
     //<Spinner visible={true} textContent={"Loading..."} textStyle={{color: '#003399'}} overlayColor={'rgba(0,51,153,0.5)'} />
 
 
-
-
-
-      if ( this.props.loginStatus == 'initial' ) {
+      if ( this.props.loginStatus == 'initial' || !this.props.fontLoaded ) {
           return (
               <AppLoading />
           );
@@ -77,8 +102,8 @@ class Loading_Screen extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-  const { loginStatus } = auth;
-  return { loginStatus };
+  const { loginStatus, fontLoaded } = auth;
+  return { loginStatus, fontLoaded };
 };
 
 const styles = {
@@ -94,5 +119,5 @@ const styles = {
 }
 
 export default connect( mapStateToProps , {
-  loginStatusChanged, authStateChanged
+  loginStatusChanged, authStateChanged, fontLoadedChanged
 })(Loading_Screen);

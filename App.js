@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
-import { Font } from 'expo';
+// import { Font } from 'expo';
 
 
 import { StyleSheet, Text, View } from 'react-native';
@@ -43,8 +43,8 @@ export default class App extends React.Component {
 
   }
 
+/*
   async componentDidMount() {
-    // console.log(KittenTheme);
     await Font.loadAsync({
       'fontawesome': require('./assets/fonts/fontawesome.ttf'),
       'icomoon': require('./assets/fonts/icomoon.ttf'),
@@ -55,6 +55,9 @@ export default class App extends React.Component {
       'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
     });
   }
+*/
+
+
 
   render() {
     const MainNavigator = StackNavigator({
