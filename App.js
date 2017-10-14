@@ -60,40 +60,42 @@ export default class App extends React.Component {
 
 
   render() {
-    const MainNavigator = StackNavigator({
+
+    const MainNavigator = TabNavigator({
+      menu_scr: {
+        screen: StackNavigator({
+          menu_screen: { screen: Menu_Screen },
+          location_screen: { screen: Location_Screen },
+        })
+      },
+      orders_screen: { screen: Orders_Screen },
+      settings_screen: { screen: Settings_Screen },
+    },
+    {
+      navigationOptions: {
+        header: null,
+        headerLeft: null
+      },
+      tabBarOptions: {
+        // activeTintColor:
+        labelStyle: { fontSize: 12 },
+        style: {
+          backgroundColor: 'white',
+        }
+      },
+      swipeEnabled: false,
+      tabBarPosition: 'bottom',
+    })
+
+
+    const LoginNavigator = StackNavigator({
       loading_scr: { screen: Loading_Screen },
       welcome_screen: { screen: Welcome_Screen },
       register_screen: { screen: Register_Screen },
       reset_screen: { screen: Reset_Screen },
       profile_screen: { screen: Profile_Screen },
       login_screen: { screen: Login_Screen},
-      main_screen: {
-          screen: TabNavigator({
-            menu_scr: {
-              screen: StackNavigator({
-                menu_screen: { screen: Menu_Screen },
-                location_screen: { screen: Location_Screen },
-              })
-            },
-            orders_screen: { screen: Orders_Screen },
-            settings_screen: { screen: Settings_Screen },
-          },
-          {
-            navigationOptions: {
-              header: null,
-              headerLeft: null
-            },
-            tabBarOptions: {
-              // activeTintColor:
-              labelStyle: { fontSize: 12 },
-              style: {
-                backgroundColor: 'white',
-              }
-            },
-            swipeEnabled: false,
-            tabBarPosition: 'bottom',
-          })
-        }
+      main_screen: { screen: MainNavigator}
       },
       {
         navigationOptions: {
@@ -106,7 +108,7 @@ export default class App extends React.Component {
       return (
         <Provider store={this.store}>
           <View style={styles.container}>
-            <MainNavigator />
+            <LoginNavigator />
           </View>
         </Provider>
       );
