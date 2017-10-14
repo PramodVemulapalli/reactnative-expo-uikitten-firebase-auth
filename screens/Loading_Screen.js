@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Dimensions, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { loginStatusChanged, authStateChanged, fontLoadedChanged } from '../actions';
 import firebase from 'firebase';
@@ -14,7 +14,6 @@ class Loading_Screen extends Component {
   };
 
   async componentDidMount() {
-    this.props.authStateChanged();
     if ( !this.props.fontLoaded ) {
       console.log(this.props.fontLoaded);
       await Font.loadAsync({
@@ -28,6 +27,7 @@ class Loading_Screen extends Component {
       });
       this.props.fontLoadedChanged(true);
     }
+    this.props.authStateChanged();
   }
 
   /*
@@ -92,10 +92,20 @@ class Loading_Screen extends Component {
           );
         }
       if ( this.props.loginStatus == 'loggedin' || this.props.loginStatus == 'notloggedin' || this.props.loginStatus == 'loginfailed' || this.props.loginStatus == 'fbloginfailed') {
+        width = Dimensions.get('window').width / 2;
         return (
-          <View/>
+          <View style={{ flex:1, justifyContent: 'center', alignItems: 'center'}}>
+            <Image style={[styles.image, {width}]} source={require('./../assets/icons/loading-icon.png')}/>
+          </View>
         );
       }
+      return (
+        <View>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+            { 'This is the invalid screen' }
+          </Text>
+        </View>
+      );
     }
 
 }
@@ -106,6 +116,9 @@ const mapStateToProps = ({ auth }) => {
 };
 
 const styles = {
+  image: {
+    resizeMode: 'contain',
+  },
   buttonContainer: {
     position: 'relative'
   },

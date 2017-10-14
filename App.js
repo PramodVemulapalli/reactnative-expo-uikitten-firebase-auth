@@ -60,7 +60,7 @@ export default class App extends React.Component {
 
 
   render() {
-    const MainNavigator = TabNavigator({
+    const MainNavigator = StackNavigator({
       loading_scr: { screen: Loading_Screen },
       welcome_screen: { screen: Welcome_Screen },
       register_screen: { screen: Register_Screen },

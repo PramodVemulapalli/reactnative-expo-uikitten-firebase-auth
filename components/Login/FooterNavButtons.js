@@ -39,18 +39,20 @@ class FooterNavButtons extends Component {
 
   _renderFooter() {
 
+    /*
     let android_s_c_justifyContent = (this.props.keyboardflag) ? 'flex-start' : 'flex-end'; // Platform.OS === 'android' &&
     if ( this.props.emailPwdBtnStr=='SignUp' && !this.props.showEmailPwdState) {
         android_s_c_justifyContent = 'flex-end';
     }
+    android_s_c_justifyContent = 'flex-start';
     let android_styles_footer = {justifyContent: android_s_c_justifyContent};
-
+    */
     if ( this.props.emailPwdBtnStr=='SignUp'  && !this.props.showEmailPwdState) {
         // In the case when we are on register screen and the show email-pwd button is not pressed
         // console.log('show email password option');
         // {...styles.footer, ...
         return (
-        <View style={android_styles_footer}>
+        <View>
           <View style={styles.textRow}>
           <RkButton
               rkType='clear'
@@ -79,7 +81,7 @@ class FooterNavButtons extends Component {
 
       */
       return (
-        <View style={{ justifyContent: 'flex-start'}}>
+        <View>
           <ForgotPwdButton emailPwdBtnStr={this.props.emailPwdBtnStr} onForgotPassword = {this.props.onForgotPassword} />
           <View style={ styles.textRow } >
             <RkButton
