@@ -16,7 +16,6 @@ class Loading_Screen extends Component {
   async componentDidMount() {
     this.props.authStateChanged();
     if ( !this.props.fontLoaded ) {
-      console.log('I am in here ----------------------------------------');
       console.log(this.props.fontLoaded);
       await Font.loadAsync({
         'fontawesome': require('./../assets/fonts/fontawesome.ttf'),

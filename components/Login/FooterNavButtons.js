@@ -74,6 +74,10 @@ class FooterNavButtons extends Component {
 
       // let android_nav_elsewhere = { marginBottom: 20 } ;
       //style={{...styles.footer, ...android_styles_footer}}
+
+      /*
+
+      */
       return (
         <View style={{ justifyContent: 'flex-start'}}>
           <ForgotPwdButton emailPwdBtnStr={this.props.emailPwdBtnStr} onForgotPassword = {this.props.onForgotPassword} />
@@ -90,7 +94,6 @@ class FooterNavButtons extends Component {
               </RkButton>
           </View>
         </View>
-
       );
     }
   }

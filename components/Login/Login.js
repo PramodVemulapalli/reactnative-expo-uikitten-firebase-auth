@@ -68,6 +68,9 @@ class Login extends Component {
     }
   }
 
+//
+
+
   pressEmailPwdButton() {
       this.setState({ showEmailPwdState: true });
   }
@@ -80,11 +83,14 @@ class Login extends Component {
       let screen_width = Dimensions.get('window').width;
       let FbButtonSize = { marginHorizontal: 20 };
       let keyboardUp_justifyContent = (this.state.keyboardflag) ? 'flex-start' : 'space-between';
-      if ( this.props.emailPwdBtnStr=='SignUp' && !this.props.showEmailPwdState) {
+      if ( this.props.emailPwdBtnStr=='SignUp' && !this.state.showEmailPwdState) {
           keyboardUp_justifyContent = 'flex-start';
       }
       let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
-
+      console.log('I am in here ----------------------------------------');
+      console.log(keyboardUp_styles_content);
+      console.log(this.props.emailPwdBtnStr);
+      console.log(this.props.showEmailPwdState);
 
 
       return (
