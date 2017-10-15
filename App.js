@@ -57,17 +57,25 @@ export default class App extends React.Component {
   }
 */
 
+/*
+
+menu_scr: {
+  screen: StackNavigator({
+    menu_screen: { screen: Menu_Screen },
+    location_screen: { screen: Location_Screen },
+  })
+},
+orders_screen: { screen: Orders_Screen },
+settings_screen: { screen: Settings_Screen },
+
+*/
+
 
 
   render() {
 
     const MainNavigator = TabNavigator({
-      menu_scr: {
-        screen: StackNavigator({
-          menu_screen: { screen: Menu_Screen },
-          location_screen: { screen: Location_Screen },
-        })
-      },
+      menu_scr: { screen: Menu_Screen },
       orders_screen: { screen: Orders_Screen },
       settings_screen: { screen: Settings_Screen },
     },

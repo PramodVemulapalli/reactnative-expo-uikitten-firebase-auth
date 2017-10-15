@@ -1,4 +1,4 @@
-// export * from './avatar';
+export * from './avatar';
 export * from './gradientButton';
 export * from './paginationIndicator';
 export * from './socialBar';

@@ -12,6 +12,8 @@ import {
   RkCard,
   RkStyleSheet
 } from 'react-native-ui-kitten';
+import { Header } from 'react-navigation';
+
 import {SocialBar} from './../components/';
 import articles from './../data/raw/articles';
 import { Button } from 'react-native-elements';
@@ -20,6 +22,8 @@ import { Button } from 'react-native-elements';
 class Menu_Screen extends Component {
 
   static navigationOptions = {
+    header: (headerOptions) => <Header {...headerOptions} />,
+    headerTitle: 'Items Screen',
     title: 'Article List'.toUpperCase()
   };
 
@@ -63,20 +67,10 @@ class Menu_Screen extends Component {
     )
   }
 
-
   render() {
 
     return (
       <View>
-        <View>
-          <Button
-            large
-            title="Log out"
-            backgroundColor="#00aced"
-            icon={{ type: 'font-awesome', color: "#ffffff", name: 'sign-out' }}
-            onPress={ () => this.props.navigation.navigate('location_screen') }
-          />
-        </View>
         <FlatList
           data={articles}
           renderItem={this.renderItem}
@@ -89,6 +83,21 @@ class Menu_Screen extends Component {
     )
   }
 }
+
+
+/*
+
+<View>
+  <Button
+    large
+    title="Log out"
+    backgroundColor="#00aced"
+    icon={{ type: 'font-awesome', color: "#ffffff", name: 'sign-out' }}
+    onPress={ () => this.props.navigation.navigate('location_screen') }
+  />
+</View>
+
+*/
 
 let styles = RkStyleSheet.create(theme => ({
   container: {
