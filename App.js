@@ -8,7 +8,7 @@ import reducers from './reducers';
 // import { Font } from 'expo';
 
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { firebaseConfig } from './config/auth';
 import { bootstrap } from './config/bootstrap';
@@ -89,7 +89,10 @@ settings_screen: { screen: Settings_Screen },
         labelStyle: { fontSize: 12 },
         style: {
           backgroundColor: 'white',
-        }
+        },
+      },
+      cardStyle: {
+        paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
       },
       swipeEnabled: false,
       tabBarPosition: 'bottom',

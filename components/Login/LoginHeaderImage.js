@@ -32,11 +32,7 @@ class LoginHeaderImage extends Component {
 
 
   _renderImage(image) {
-    console.log('LoginHeaderImage-------------------------');
-    console.log('Im here ---------------------------------');
-    console.log(this.props.keyboardflag);
-    console.log(this.props.loginStatus);
-    console.log(this.props.emailPwdBtnStr);
+
     if ( this.props.keyboardflag == false || this.props.loginStatus == 'fbchecking' || this.state.fbcheckingFinished) {
 
         if ( this.props.emailPwdBtnStr == 'SignUp' || this.props.emailPwdBtnStr == 'SignIn') {

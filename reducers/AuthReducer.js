@@ -30,6 +30,16 @@ const INITIAL_STATE = {
   loadWelcome: false
 };
 
+const RESET_STATE = {
+  email: '',
+  emailReset: '',
+  password: '',
+  phone: '',
+  firstname: '',
+  lastname: '',
+  error: ''
+};
+
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case EMAIL_CHANGED:
@@ -45,6 +55,7 @@ export default (state = INITIAL_STATE, action) => {
     case LASTNAME_CHANGED:
       return { ...state, lastname: action.payload };
     case FONT_LOADED_CHANGED:
+      console.log('Auth reducer: FONT_LOADED_CHANGED ---------------------->  Here');
       return { ...state, fontLoaded: action.payload };
     case ERROR_SET:
       return { ...state, error: action.payload };
@@ -53,6 +64,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGIN_STATUS_CHANGED:
       console.log('AuthReducer: LOGIN_STATUS_CHANGED');
       if (action.payload == 'notloggedin') {
+        console.log('Auth reducer: notloggedin');
         return { ...state, loginStatus: action.payload, email: '', password: '', phone:'', firstname: '', lastname: '', error:'', user: null };
       } else {
         return { ...state, loginStatus: action.payload};
@@ -60,7 +72,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOAD_WELCOME_CHANGED:
       return { ...state, loadWelcome: action.payload };
     case LOGIN_USER_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.payload, loginStatus: 'loggedin', email: '', password: ''};
+      return { ...state, ...RESET_STATE, user: action.payload, loginStatus: 'loggedin', email: '', password: ''};
     case LOGIN_USER_FAIL:
       return { ...state, error: action.payload, password: '', loginStatus: 'loginfailed'  };
     default:

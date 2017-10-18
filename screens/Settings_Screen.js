@@ -42,7 +42,6 @@ class Settings_Screen extends Component {
       email: this.user.email,
       phone: this.user.phone,
     }
-
   }
 
   render() {
