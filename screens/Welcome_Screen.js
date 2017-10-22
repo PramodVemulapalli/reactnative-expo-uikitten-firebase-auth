@@ -15,13 +15,7 @@ import { loginStatusChanged, authStateChanged, fontLoadedChanged } from '../acti
 import AppSpinner from './../components/Loading/AppSpinner';
 import NavigatorService from './../utils/navigator';
 import ErrorMessage from './../components/ErrorMessage';
-
-
-
-import { Font } from 'expo';
-
-
-
+import loadAssetsAsync from './../utils/loadFonts';
 
 class Welcome_Screen extends Component {
 
@@ -39,12 +33,18 @@ class Welcome_Screen extends Component {
       console.log('component did mount');
       console.log('loadAssetAsync');
       if ( !this.props.fontLoaded ) {
-      this._loadAssetsAsync();
-      console.log('authstatechanged');
-      this.props.authStateChanged();
+        // this._loadAssetsAsync();
+        loadAssetsAsync();
+        console.log('All fonts loaded !');
+        this.props.fontLoadedChanged(true);
+        // note that the authStateChanged is only called
+        // initally when the fonts are loaded
+        console.log('authstatechanged');
+        this.props.authStateChanged();
     }
   }
 
+  /*
   cacheFonts(fonts) {
     return (fonts.map(font => Font.loadAsync(font)));
   }
@@ -65,6 +65,8 @@ class Welcome_Screen extends Component {
     console.log('All fonts loaded !');
     this.props.fontLoadedChanged(true);
   }
+
+  */
 
   changeIndex(index) {
     this.setState({index})

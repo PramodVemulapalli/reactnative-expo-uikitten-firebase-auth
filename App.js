@@ -20,7 +20,7 @@ import NavigatorService from './utils/navigator';
 import Welcome_Screen from './screens/Welcome_Screen';
 import Register_Screen from './screens/Register_Screen';
 import Login_Screen from './screens/Login_Screen';
-import Loading_Screen from './screens/Loading_Screen';
+// import Loading_Screen from './screens/Loading_Screen';
 import Menu_Screen from './screens/Menu_Screen';
 import Orders_Screen from './screens/Orders_Screen';
 import Location_Screen from './screens/Location_Screen';
