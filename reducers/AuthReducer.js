@@ -55,7 +55,6 @@ export default (state = INITIAL_STATE, action) => {
     case LASTNAME_CHANGED:
       return { ...state, lastname: action.payload };
     case FONT_LOADED_CHANGED:
-      console.log('Auth reducer: FONT_LOADED_CHANGED ---------------------->  Here');
       return { ...state, fontLoaded: action.payload };
     case ERROR_SET:
       return { ...state, error: action.payload };

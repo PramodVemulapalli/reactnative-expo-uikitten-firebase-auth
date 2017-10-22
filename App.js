@@ -12,6 +12,9 @@ import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { firebaseConfig } from './config/auth';
 import { bootstrap } from './config/bootstrap';
+import { RkStyleSheet, RkTheme } from 'react-native-ui-kitten';
+import NavigatorService from './utils/navigator';
+
 // import KittenTheme from './config/theme';
 
 import Welcome_Screen from './screens/Welcome_Screen';
@@ -81,15 +84,26 @@ settings_screen: { screen: Settings_Screen },
     },
     {
       navigationOptions: {
-        header: null,
-        headerLeft: null
+        headerLeft: null,
+        headerStyle: {
+           backgroundColor: 'white',
+           elevation: 2,
+           paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight + 10
+         },
+         headerTitleStyle: {
+           fontSize: RkTheme.current.fonts.sizes.h5,
+           alignSelf:'center',
+           marginBottom: Platform.OS === 'ios' ? 0 : 10,
+           marginTop: Platform.OS === 'ios' ? 25: 0
+         }
       },
       tabBarOptions: {
-        // activeTintColor:
-        labelStyle: { fontSize: 12 },
-        style: {
-          backgroundColor: 'white',
-        },
+        showLabel: false,
+        showIcon: true,
+        indicatorStyle: { backgroundColor: '#ffffff' },
+        activeTintColor: RkTheme.current.colors.accent,
+        inactiveTintColor: RkTheme.current.colors.text.hint,
+        style: { backgroundColor: '#ffffff' },
       },
       cardStyle: {
         paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
@@ -98,9 +112,9 @@ settings_screen: { screen: Settings_Screen },
       tabBarPosition: 'bottom',
     })
 
+//       loading_scr: { screen: Loading_Screen },
 
     const LoginNavigator = StackNavigator({
-      loading_scr: { screen: Loading_Screen },
       welcome_screen: { screen: Welcome_Screen },
       register_screen: { screen: Register_Screen },
       reset_screen: { screen: Reset_Screen },
@@ -119,17 +133,20 @@ settings_screen: { screen: Settings_Screen },
       return (
         <Provider store={this.store}>
           <View style={styles.container}>
-            <LoginNavigator />
+            <LoginNavigator
+            ref={navigatorRef => {
+              NavigatorService.setContainer(navigatorRef);
+            }}/>
           </View>
         </Provider>
       );
   }
 }
 
-const styles = StyleSheet.create({
+let styles = RkStyleSheet.create(theme => ({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
-});
+}));

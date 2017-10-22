@@ -11,7 +11,6 @@ import {
 
 import validator from 'validator';
 import { emailChanged, phoneChanged, firstnameChanged, lastnameChanged, errorSet } from '../actions';
-import Spinner from 'react-native-loading-spinner-overlay';
 import EmailTextInput from './../components/Login/EmailTextInput';
 import FirstnameTextInput from './../components/Login/FirstnameTextInput';
 import LastnameTextInput from './../components/Login/LastnameTextInput';
@@ -19,6 +18,10 @@ import PhoneTextInput from './../components/Login/PhoneTextInput';
 import ProfileDataButton from './../components/Login/ProfileDataButton';
 import FooterNavButtons from './../components/Login/FooterNavButtons';
 import LoginHeaderImage from './../components/Login/LoginHeaderImage';
+import NavigatorService from './../utils/navigator';
+import LoadingSpinner from './../components/Loading/LoadingSpinner';
+
+
 
 import ErrorMessage from './../components/ErrorMessage';
 import { FormLabel, FormInput, FormValidationMessage, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
@@ -80,18 +83,10 @@ class ProfileScreen extends Component {
 
   onRegisterPressAndReady() {
     this.setState({ loadingState: true });
-    this.props.navigation.navigate('register_screen')
+    // this.props.navigation.navigate('register_screen')
+    NavigatorService.reset('register_screen');
     this.setState({ loadingState: false });
     Keyboard.dismiss();
-  }
-
-  renderSpinner() {
-    // console.log('Profile_Screen:line171: ' + this.state.loadingState);
-    if (this.state.loadingState) {
-      return (
-          <Spinner visible={true} color={'#FFFFFF'} size={'large'} />
-      );
-    }
   }
 
   render() {
@@ -104,6 +99,7 @@ class ProfileScreen extends Component {
     return (
       <View style={{ ...styles.screen, ...keyboardUp_styles_content}}>
 
+        <LoadingSpinner parentFlag={this.state.loadingState} />
         <LoginHeaderImage
           keyboardflag = {this.state.keyboardflag}
           emailPwdBtnStr = {'Profile'}
@@ -122,11 +118,15 @@ class ProfileScreen extends Component {
             onForgotPassword={''}
             onNavString1={'Already have an account?'}
             onNavString2={'Sign In now'}
-            onNavPress={() => this.props.navigation.navigate('login_screen')}
+            onNavPress={
+              () => {
+                NavigatorService.reset('login_screen');
+                //this.props.navigation.navigate('login_screen');
+              }
+            }
             keyboardflag={this.state.keyboardflag}
             showEmailPwdState={true}
           />
-          {this.renderSpinner()}
           <ErrorMessage />
         </View>
 

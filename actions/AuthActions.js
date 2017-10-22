@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
@@ -17,6 +18,8 @@ import {
   ERROR_SET,
   RESET_USER
 } from './types';
+
+import NavigatorService from './../utils/navigator';
 
 export const errorSet = (text) => {
   return {
@@ -104,15 +107,12 @@ export const loginUser = ({ email, password }) => {
       let user = await firebase.auth().signInWithEmailAndPassword(email, password);
       console.log('user logged successfully');
       loginUserSuccess(dispatch, user);
-
     }
     catch (error) {
       console.log(error);
       let err_message = error.message;
       loginUserFail(dispatch, err_message);
     }
-
-
   };
 };
 
@@ -198,19 +198,31 @@ export const signupUser = ({ email, password, phone, firstname, lastname  }) => 
   };
 };
 
+// Get message from firebase and do the reset
 export const authStateChanged = () => {
   return ( dispatch ) => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
+          console.log('Authactions: Line 260: Dispatched loggedin');
           dispatch({
             type: LOGIN_STATUS_CHANGED,
             payload: 'loggedin'
           });
+          currentNavState = NavigatorService.getCurrentRoute();
+          if (currentNavState.routeName != 'main_screen') {
+            NavigatorService.reset('main_screen');
+          }
         } else {
+         console.log('Authactions: Line 216: Dispatched not loggedin');
          dispatch({
             type: LOGIN_STATUS_CHANGED,
             payload: 'notloggedin'
           });
+          // console.log('NavigatorService.getCurrentRoute()');
+          currentNavState = NavigatorService.getCurrentRoute();
+          if (currentNavState.routeName != 'welcome_screen') {
+            NavigatorService.reset('welcome_screen');
+          }
         }
       });
   }

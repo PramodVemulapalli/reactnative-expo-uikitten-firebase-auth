@@ -10,9 +10,11 @@ import {
   StatusBar
 } from 'react-native';
 
-import {RkStyleSheet, RkText} from 'react-native-ui-kitten';
+import {RkStyleSheet, RkText, RkTheme} from 'react-native-ui-kitten';
 import {Avatar} from './../components';
 import notifications from './../data/raw/notifications';
+import {FontAwesome} from './../assets/icons';
+
 
 
 // import { View, Text } from 'react-native';
@@ -23,8 +25,21 @@ class OrdersScreen extends Component {
 
   // Donot show header
   static navigationOptions = {
-    header: (headerOptions) => <Header {...headerOptions} />,
+
     headerTitle: 'Orders',
+    tabBarIcon: ({ tintColor }) => (
+      <RkText
+        rkType='awesome'
+        style={{
+          color: tintColor,
+          marginBottom: 0,
+        }}>
+          {FontAwesome.list}
+      </RkText>
+    ),
+
+    /*
+    header: (headerOptions) => <Header {...headerOptions} />,
     headerStyle: {
        backgroundColor: '#FFFFFF',
        elevation: 2,
@@ -35,6 +50,7 @@ class OrdersScreen extends Component {
       alignSelf:'center',
       marginBottom: Platform.OS === 'ios' ? 0 : 10
     }
+    */
   };
 
   constructor(props) {

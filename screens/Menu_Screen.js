@@ -5,26 +5,39 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Platform
+  Platform,
+  StatusBar
 } from 'react-native';
 import {
   RkText,
   RkCard,
-  RkStyleSheet
+  RkStyleSheet,
+  RkTheme
 } from 'react-native-ui-kitten';
 import { Header } from 'react-navigation';
 
 import {SocialBar} from './../components/';
 import articles from './../data/raw/articles';
 import { Button } from 'react-native-elements';
+import {FontAwesome} from './../assets/icons';
 
 
 class Menu_Screen extends Component {
 
   static navigationOptions = {
-    header: (headerOptions) => <Header {...headerOptions} />,
-    headerTitle: 'Items Screen',
-    title: 'Article List'.toUpperCase()
+    headerTitle: 'Items',
+    tabBarLabel: 'Home',
+    tabBarIcon: ({ tintColor }) => (
+      <RkText
+        rkType='awesome'
+        style={{
+          color: tintColor,
+          fontSize: 24,
+          marginBottom: 0,
+        }}>
+          {FontAwesome.home}
+      </RkText>
+    ),
   };
 
   constructor(props) {
@@ -49,14 +62,14 @@ class Menu_Screen extends Component {
 
           <View rkCardContent style={{justifyContent: 'space-around'}}>
             <View style={{ flex: 1, justifyContent: 'flex-start'}}>
-              <RkText numberOfLines={1} rkType='header6'>{info.item.header}</RkText>
-              <RkText rkType='secondary6 hintColor'>{'Sandra Powers'}</RkText>
+              <RkText numberOfLines={1} rkType='h6'>{info.item.header}</RkText>
+              <RkText rkType='s6 hintColor'>{'Sandra Powers'}</RkText>
             </View>
             <View style={{ marginTop: 20, flex: 1, justifyContent: 'center'}}>
-              <RkText style={styles.post} numberOfLines={1} rkType={Platform.OS==='android' ? 'secondary5':'secondary3'}>{'Hi There 1'}</RkText>
+              <RkText style={styles.post} numberOfLines={1} rkType={Platform.OS==='android' ? 's5':'s3'}>{'Hi There 1'}</RkText>
             </View>
             <View style={{ marginBottom: 0, flex: 1, justifyContent: 'flex-end'}}>
-              <RkText style={styles.post} numberOfLines={1} rkType={Platform.OS==='android' ? 'secondary5  hintColor':'secondary3  hintColor'}>{'8 Oz / $2.99'}</RkText>
+              <RkText style={styles.post} numberOfLines={1} rkType={Platform.OS==='android' ? 's5  hintColor':'s3  hintColor'}>{'8 Oz / $2.99'}</RkText>
             </View>
           </View>
           <View rkCardFooter>

@@ -11,6 +11,9 @@ import FbSignInUpButton from './FbSignInUpButton';
 import EmailPwdButton from './EmailPwdButton';
 import FooterNavButtons from './FooterNavButtons';
 import { loginUser, signupUser, facebookSignin, errorSet, facebookSignup } from './../../actions';
+import LoadingSpinner from './../Loading/LoadingSpinner';
+
+
 
 import {
   RkStyleSheet
@@ -100,13 +103,17 @@ class Login extends Component {
 
       let keyboardUp_styles_content = {justifyContent: keyboardUp_justifyContent};
       android_styles_container = {marginTop: android_s_c_marginTop};
-
+      /*
       console.log('This is Login.js +++++++++++++++++++++++');
       console.log(this.props.emailPwdBtnStr);
       console.log(android_styles_container);
 
+      */
+
       return (
         <View style={{ ...styles.screen, ...keyboardUp_styles_content}}>
+
+          <LoadingSpinner />
 
           <View>
             <LoginHeaderImage
@@ -132,6 +139,8 @@ class Login extends Component {
             pressEmailPwdButton={this.pressEmailPwdButton.bind(this)}
             showEmailPwdState={this.state.showEmailPwdState}
           />
+
+          <ErrorMessage />
         </View>
       );
   }
@@ -148,7 +157,7 @@ let styles = RkStyleSheet.create(theme => ({
   screen: {
     flex: 1,
     backgroundColor: theme.colors.screen.base
-  }
+  },
 }));
 
 export default connect(mapStateToProps,null)(Login);

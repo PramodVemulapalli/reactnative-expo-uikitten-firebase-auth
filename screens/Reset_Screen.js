@@ -23,7 +23,7 @@ import FooterNavButtons from './../components/Login/FooterNavButtons';
 import ErrorMessage from './../components/ErrorMessage';
 import { FormLabel, FormInput, FormValidationMessage, Button, Divider, SocialIcon, Icon } from 'react-native-elements';
 import {scale, scaleModerate, scaleVertical} from './../utils/scale';
-
+import NavigatorService from './../utils/navigator';
 
 import {
   RkButton,
@@ -81,11 +81,13 @@ class Reset_Screen extends Component {
   onReset() {
     // this.setState({ loadingState: true });
     console.log("Reset_Screen:Line 90: Email");
-    this.props.navigation.navigate('welcome_screen');
+    NavigatorService.reset('welcome_screen');
+    // this.props.navigation.navigate('welcome_screen');
     // this.setState({ loadingState: false });
     Keyboard.dismiss();
   }
 
+  /*
   onButtonPress() {
     // this.setState({ loadingState: true });
     if (this.validateInput('emailReset', this.props.emailReset)) {
@@ -96,6 +98,7 @@ class Reset_Screen extends Component {
     // this.setState({ loadingState: false });
     Keyboard.dismiss();
   }
+  */
 
   // Validate the form inputs
   validateInput(inputName, inputVal) {
@@ -136,17 +139,20 @@ class Reset_Screen extends Component {
 
       <View style={{...styles.screen, ...keyboardUp_styles_content}}>
 
-      <View>
-        <LoginHeaderImage
-          keyboardflag = {this.state.keyboardflag}
-          emailPwdBtnStr = {'Reset'}
-          headerString = {'Password Reset'}
-        />
-      </View>
 
-      <View>
-        <EmailResetTextInput />
-      </View>
+
+        <View>
+          <ErrorMessage />
+          <LoginHeaderImage
+            keyboardflag = {this.state.keyboardflag}
+            emailPwdBtnStr = {'Reset'}
+            headerString = {'Password Reset'}
+          />
+        </View>
+
+        <View>
+          <EmailResetTextInput />
+        </View>
 
         <View style={{ ...styles.buttonStyle, ...keyboardUp_styles_content }}>
           <EmailPwdButton
@@ -158,13 +164,10 @@ class Reset_Screen extends Component {
             onForgotPassword={''}
             onNavString1={'Already have an account?'}
             onNavString2={'Sign In now'}
-            onNavPress={() => this.props.navigation.navigate('login_screen')}
+            onNavPress={() => NavigatorService.reset('login_screen')}
             keyboardflag={this.state.keyboardflag}
             showEmailPwdState={true}
           />
-
-
-        <ErrorMessage />
 
         </View>
 

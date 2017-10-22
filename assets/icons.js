@@ -27,4 +27,8 @@ export const FontAwesome = {
   bars: String.fromCharCode(61641),
   slashEye: String.fromCharCode(61552),
   github: String.fromCharCode(61595),
+  calendar: String.fromCharCode(61555),
+  home: String.fromCharCode(61461),
+  list: String.fromCharCode(61498),
+  cog: String.fromCharCode(61459)
 };

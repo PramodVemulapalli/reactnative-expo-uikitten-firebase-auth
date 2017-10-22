@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import Login from './../components/Login/Login';
 import { facebookSignin } from '../actions';
+import NavigatorService from './../utils/navigator';
 
 
 class Register_Screen extends Component {
@@ -19,8 +20,8 @@ class Register_Screen extends Component {
             showEmailPwdOption={false} // the email password option will be hidden
             onNavString1='Already have an account?'
             onNavString2='Sign In now'
-            onNavPress={ () => { this.props.navigation.navigate('login_screen'); } }
-            onForgotPassword={ () => { this.props.navigation.navigate('reset_screen'); } }
+            onNavPress={ () => { NavigatorService.reset('login_screen'); } }
+            onForgotPassword={ () => { NavigatorService.reset('reset_screen'); } }
           />
       )
   }

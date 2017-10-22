@@ -21,7 +21,7 @@ class EmailPwdButton extends Component {
         if ( this.validateInput('email', email) && this.validateInput('password', password)) {
           this.props.loginUser({ email, password });
         } else {
-          this.props.errorSet('Please provide a valid inputs');
+          this.props.errorSet('Please provide valid inputs');
         }
     }
 
@@ -30,7 +30,7 @@ class EmailPwdButton extends Component {
         if ( this.validateInput('email', email) && this.validateInput('password', password)) {
           this.props.signupUser({ email, password, phone, firstname, lastname });
         } else {
-          this.props.errorSet('Please provide a valid inputs');
+          this.props.errorSet('Please provide valid inputs');
         }
     }
 
@@ -40,7 +40,7 @@ class EmailPwdButton extends Component {
           this.props.resetUser({email: emailReset});
           this.props.onButtonPress();
         } else {
-          this.props.errorSet('Please provide a valid input');
+          this.props.errorSet('Please provide valid inputs');
         }
     }
 

@@ -12,6 +12,8 @@ import {
   RkTheme,
   RkStyleSheet
 } from 'react-native-ui-kitten';
+
+
 import { Header } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
@@ -21,14 +23,29 @@ import { logoutUser } from '../actions';
 import users from './../data/raw/users';
 import {Avatar} from './../components';
 import {GradientButton} from './../components/';
+import {FontAwesome} from './../assets/icons';
+import LoadingSpinner from './../components/Loading/LoadingSpinner';
 
+
+
+// FontAwesome.cog
 
 class Settings_Screen extends Component {
 
   // Donot show header
   static navigationOptions = {
-    header: (headerOptions) => <Header {...headerOptions} />,
-    headerTitle: 'Settings Screen'
+    headerTitle: 'Profile Settings',
+    tabBarIcon: ({ tintColor }) => (
+      <RkText
+        rkType='awesome'
+        style={{
+          color: tintColor,
+          fontSize: 22,
+          marginBottom: 0,
+        }}>
+          {FontAwesome.cog}
+      </RkText>
+    ),
   };
 
   constructor(props) {
@@ -45,9 +62,13 @@ class Settings_Screen extends Component {
   }
 
   render() {
+    console.log('RkTheme.current.colors.accent = ' + RkTheme.current.colors.acc);
+    console.log('RkTheme.current.colors.alterBackground = ' + RkTheme.current.colors.alterBackground);
+
     return (
       <ScrollView style={styles.root}>
         <RkAvoidKeyboard>
+          <LoadingSpinner />
           <View style={styles.header}>
             <Avatar img={require('./../data/img/photo45.png')} rkType='big'/>
           </View>
