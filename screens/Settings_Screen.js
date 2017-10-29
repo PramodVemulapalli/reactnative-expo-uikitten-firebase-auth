@@ -40,7 +40,7 @@ class Settings_Screen extends Component {
         rkType='awesome'
         style={{
           color: tintColor,
-          fontSize: 22,
+          fontSize: 26,
           marginBottom: 0,
         }}>
           {FontAwesome.cog}
