@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Platform } from 'react-native';
+import { View, Dimensions, Platform, Image } from 'react-native';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { AppLoading } from 'expo';
