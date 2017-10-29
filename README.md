@@ -2,12 +2,12 @@
 # A React Native Authentication boilerplate to get you started on your consumer
 A shell consumer app with Facebook Auth and Email/Pwd auth using react native, expo, uikitten, and firebase. 
 
-### Demo
-
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/pDNQ4_IJ9TM/0.jpg)](http://www.youtube.com/watch?v=pDNQ4_IJ9TM)
-
 ### Live Demo on Expo
 [![IMAGE ALT TEXT HERE](https://raw.githubusercontent.com/PramodVemulapalli/reactnative-expo-uikitten-firebase-auth/master/assets/icons/expo.png)
+
+### Video Demo
+
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/pDNQ4_IJ9TM/0.jpg)](http://www.youtube.com/watch?v=pDNQ4_IJ9TM)
 
 ### **How to Install**
 
