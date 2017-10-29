@@ -1,2 +1,2 @@
-export * from './firebase_info';
-export * from './facebook_info';
+export * from './firebase_info_real';
+export * from './facebook_info_real';
