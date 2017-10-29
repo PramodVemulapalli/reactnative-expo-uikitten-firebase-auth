@@ -3,7 +3,7 @@
 A shell consumer app with Facebook Auth and Email/Pwd auth using react native, expo, uikitten, and firebase. 
 
 ### Live Demo on Expo
-[![IMAGE ALT TEXT HERE](https://raw.githubusercontent.com/PramodVemulapalli/reactnative-expo-uikitten-firebase-auth/master/assets/icons/expo.png)
+![IMAGE ALT TEXT HERE](https://raw.githubusercontent.com/PramodVemulapalli/reactnative-expo-uikitten-firebase-auth/master/assets/icons/expo.png)
 
 ### Video Demo
 
