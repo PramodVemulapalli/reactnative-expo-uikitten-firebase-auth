@@ -1,8 +1,6 @@
-# reactnative-expo-uikitten-firebase-auth
-A shell consumer app with Facebook Auth and Email/Pwd auth using react native, expo, uikitten, and firebase. 
 
 # A React Native Authentication boilerplate to get you started on your consumer
-app using expo, uikitten, and firebase.
+A shell consumer app with Facebook Auth and Email/Pwd auth using react native, expo, uikitten, and firebase. 
 
 ### Demo
 
