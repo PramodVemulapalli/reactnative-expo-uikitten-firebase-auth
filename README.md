@@ -206,12 +206,6 @@ It would be great if you can provide feedback or would like to collaborate to
 improve upon this project. Many thanks to the code contributors to the above
 libraries.
 
-* [React Native](https://medium.com/tag/react-native?source=post)
-* [Expo](https://medium.com/tag/expo?source=post)
-* [Firebase](https://medium.com/tag/firebase?source=post)
-
-Clapping shows how much you appreciated PramodVemulapalli’s story.
-
 ### [PramodVemulapalli](https://medium.com/@vpramod1)
 
 A product guy by day, tinkerer by night, and a dreamer by nature
