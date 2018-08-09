@@ -4,7 +4,7 @@
     "description": "A shell consumer app with Facebook Auth and Email/Pwd auth using react native, expo, uikitten, and firebase.",
     "slug": "reactnative-expo-uikitten-firebase-auth",
     "privacy": "public",
-    "sdkVersion": "21.0.0",
+    "sdkVersion": "28.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
