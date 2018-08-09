@@ -1,5 +1,5 @@
 
-# A React Native Authentication boilerplate to get you started on your consumer
+# A React Native Authentication boilerplate to get you started on your consumer app. 
 A shell consumer app with Facebook Auth and Email/Pwd auth using react native, expo, uikitten, and firebase. 
 
 ### Live Demo on Expo
