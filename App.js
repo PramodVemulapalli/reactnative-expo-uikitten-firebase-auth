@@ -9,7 +9,7 @@ import reducers from './reducers';
 
 
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { firebaseConfig } from './config/auth';
 import { bootstrap } from './config/bootstrap';
 import { RkStyleSheet, RkTheme } from 'react-native-ui-kitten';
@@ -77,7 +77,8 @@ settings_screen: { screen: Settings_Screen },
 
   render() {
 
-    const MainNavigator = TabNavigator({
+    // const MainNavigator = TabNavigator({
+    const MainNavigator = createBottomTabNavigator({
       menu_scr: { screen: Menu_Screen },
       orders_screen: { screen: Orders_Screen },
       settings_screen: { screen: Settings_Screen },
@@ -114,7 +115,7 @@ settings_screen: { screen: Settings_Screen },
 
 //       loading_scr: { screen: Loading_Screen },
 
-    const LoginNavigator = StackNavigator({
+    const LoginNavigator = createStackNavigator({
       welcome_screen: { screen: Welcome_Screen },
       register_screen: { screen: Register_Screen },
       reset_screen: { screen: Reset_Screen },
